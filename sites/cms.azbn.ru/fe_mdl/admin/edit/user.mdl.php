@@ -1,0 +1,20 @@
+<?
+// ЦМС
+$type=$this->FE->c_s($param['req_arr']['param_1']);
+$id=$this->FE->as_int($param['req_arr']['param_2']);
+
+$table=$this->FE->DB->dbtables['t_'.$type];
+$param['html_tpl']='admin/edit/'.$type;
+$param['edit_el']=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `$table` WHERE (id='$id')");
+$param['edit_el']['param']=unserialize($param['edit_el']['param']);
+$param['edit_el']['right']=explode(',',$param['edit_el']['right']);
+			if(count($param['edit_el']['right'])) {
+				$right=$param['edit_el']['right'];
+				unset($param['edit_el']['right']);
+				$param['edit_el']['right']=array();
+				foreach($right as $right_id) {
+					$param['edit_el']['right'][$right_id]=1;
+					}
+				}
+
+?>

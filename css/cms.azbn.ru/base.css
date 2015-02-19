@@ -1,0 +1,136 @@
+object, embed, div img {
+	max-width:100%;
+	}
+h1,h2,h3,h4,h5,h6 {
+	margin-top:0px;
+	}
+
+.hidden {
+	display:none;
+	}
+
+.ghost_el {
+	width:100px;
+	height:100px;
+	max-width:100px;
+	max-height:100px;
+	margin:0px;
+	padding:0px;
+	top:-500px;
+	left:-500px;
+	position:absolute;
+	overflow:hidden;
+	}
+
+.clear,.clear10,.clear20,.clear30 {
+	clear:both;
+	line-height: 0px;
+	margin: 0px;
+	padding: 0px;
+	font-size: 0px;
+	}
+	.clear {
+		height: 0px;
+		max-height: 0px;
+		}
+	.clear5 {
+		height: 5px;
+		max-height: 5px;
+		}
+	.clear10 {
+		height: 10px;
+		min-height: 10px;
+		}
+	.clear20 {
+		height: 20px;
+		min-height: 20px;
+		}
+	.clear30 {
+		height: 30px;
+		min-height: 30px;
+		}
+/*
+----- CSS-FE -----
+*/
+.fe-info-popup {
+	position: absolute;
+	top:8px;
+	right:8px;
+	width:420px;
+	max-width: 94%;
+	border: 1px solid #fdfdfd;
+	border-radius:2px;
+	padding:0px;
+	color: #71653a;
+	background-color: #f8f8f8;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	}
+	.fe-info-popup-header,.fe-info-popup-footer {
+		background-color: #f0f0f0;
+		margin:0px;
+		padding:8px;
+		font-weight:bold;
+		}
+	.fe-info-popup-body {
+		padding:12px 8px;
+		}
+
+.fe-img-upload {
+	
+	}
+	.fe-img-upload-btn {
+		
+		}
+	.fe-img-upload-field {
+		
+		}
+	.fe-img-upload-viewer {
+		display:block;
+		margin-top:10px;
+		}
+
+.fe-editable {
+	border-bottom:2px dotted blue;
+	}
+
+.fe-overflow-hidden {
+	overflow:hidden;
+	}
+
+
+.fe-dbg { outline: 2px dotted red; }
+.fe-dbg * { outline: 2px dotted green; }
+.fe-dbg * * { outline: 2px dotted orange; }
+.fe-dbg * * * { outline: 2px dotted blue; }
+.fe-dbg * * * * { outline: 1px solid red; }
+.fe-dbg * * * * * { outline: 1px solid green; }
+.fe-dbg * * * * * * { outline: 1px solid orange; }
+.fe-dbg * * * * * * * { outline: 1px solid blue; }
+
+.fe-dbg-line-v {
+	display:block;
+	position:absolute;
+	z-index:9999;
+	background-color:rgba(0,255,127,1);
+	width:1px;
+	height:100%;
+	top:0px;
+	}
+
+.fe-dbg-line-h {
+	display:block;
+	position:absolute;
+	z-index:9999;
+	background-color:rgba(0,255,127,1);
+	width:100%;
+	height:1px;
+	left:0px;
+	}
+
+.fe- {
+	
+	}
+
+/*
+----- /CSS-FE -----
+*/

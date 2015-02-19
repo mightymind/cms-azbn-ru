@@ -1,0 +1,292 @@
+<?
+// CMS Azbn.ru Публичная версия
+
+class Viewer
+{
+public $class_name='viewer';
+
+	function __construct()
+	{
+		$_SESSION['tmp']['back_url']=$_SERVER['REQUEST_URI'];
+		}
+
+	public function form($tpl,&$param)
+	{
+		require('sites/'.$this->FE->config['site'].'/tpl/'.$tpl.'.tpl.php');
+		$this->FE->mem_mark('viewer->form '.$tpl);
+		}
+	
+	public function module($tpl,&$param,$period=900)
+	{
+		//$this->FE->mem_mark('start module '.$tpl);
+		if($param['mdl'][$tpl]) {
+			$cache=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `".$this->FE->DB->dbtables['t_cache']."` WHERE (uid='module_".$param['mdl'][$tpl].'_'.$this->FE->config['zip']."' AND clear_at>'{$this->FE->date}')");
+			if($cache['id']) {	
+				echo $cache['text'];
+				} else {
+					$this->FE->Cache->start_caching();
+					require('sites/'.$this->FE->config['site'].'/module/'.$param['mdl'][$tpl].'.mdl.php');
+					$cache=array(
+								'created_at'=>$this->FE->date,
+								'clear_at'=>($this->FE->date+$period),
+								'uid'=>'module_'.$param['mdl'][$tpl].'_'.$this->FE->config['zip'],
+								'text'=>($this->FE->Cache->get_caching_content()) // mysql_escape_string($this->FE->Cache->get_caching_content())
+								);
+					$this->FE->Cache->finish_caching();
+					//$this->FE->DB->dbDelete($this->FE->DB->dbtables['t_cache'],"WHERE uid='".$this->FE->config['zip'].'_module_'.$param['mdl'][$tpl]."'");
+					$cache['id']=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_cache'],$cache);
+					echo $cache['text'];
+					}
+			}
+		$this->FE->mem_mark('viewer->module '.$tpl);
+		}
+
+	public function module_live($tpl,&$param)
+	{
+		//$this->FE->mem_mark('start module '.$tpl);
+		if($param['mdl'][$tpl]) {
+			require('sites/'.$this->FE->config['site'].'/module/'.$param['mdl'][$tpl].'.mdl.php');
+			}
+		$this->FE->mem_mark('viewer->module_live '.$tpl);
+		}
+	
+	public function startofpage(&$param)
+	{
+		if(!$param['page_html']['seo']['id']) {
+			if($param['item_id']['seo']) {
+				$param['page_html']['seo']=$this->FE->CMS->getSEO($param['item_id']['seo'],array(
+					'{%title%}'=>$param['item_id']['title'],
+					'{%description%}'=>$param['item_id']['preview'],
+					'{%keywords%}'=>$param['item_id']['tag'],
+					));
+			} elseif($param['cat_id']['seo']) {
+				$param['page_html']['seo']=$this->FE->CMS->getSEO($param['cat_id']['seo'],array(
+					'{%title%}'=>$param['cat_id']['title'],
+					'{%description%}'=>$param['cat_id']['preview'],
+					'{%keywords%}'=>$param['cat_id']['tag'],
+					));
+			} else {
+				
+			}
+		}
+		
+		?><!DOCTYPE html>
+<html>
+<head>
+<title><?=$param['page_html']['seo']['title'].' - '.$this->fe_config['enginetitle'];?></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="revisit" content="20" />
+<meta name="document-state" content="Dynamic" />
+<meta name="resource-type" content="document" />
+<meta name="generator" content="CMS Azbn.ru <?=$this->FE->version['number'];?>" />
+<meta HTTP-EQUIV="Cache-Control" content="no-cache" />
+<meta name="Copyright" content="Зыбинская Пропаганда" lang="ru" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="<?=$param['page_html']['seo']['desc'];?>" />
+<meta name="keywords" content="<?=$param['page_html']['seo']['kw'];?>" />
+
+<link href="/img/cms.azbn.ru/favicon.png" rel="icon" type="image/x-icon" />
+<link href="/css/bs3/bootstrap.min.css" rel="stylesheet">
+<link href="/css/cms.azbn.ru/base.css?v=201502111615" rel="stylesheet">
+<link href="/css/cms.azbn.ru/site.css?v=201502111615" rel="stylesheet">
+<link href="/css/cms.azbn.ru/sandbox.css?v=201502111615" rel="stylesheet">
+
+<script src="http://yandex.st/jquery/2.1.3/jquery.min.js"></script>
+<script>
+if(typeof window.jQuery === 'undefined') {
+	document.write(
+		unescape("%3Cscript src='/js/jquery.min.js' type='text/javascript'%3E%3C/script%3E")
+		);
+	}
+</script>
+
+<script src="/js/bs3/bootstrap.min.js"></script>
+
+<!--<script src="/js/jquery.jqfeFileUploader.js"></script>-->
+<!--<script src="/js/jquery.jqfeModal.js"></script>-->
+<script src="/js/jquery.jqfeInfoMsg.js"></script>
+<!--<script src="/js/jquery.jqfeDropImgOptimizer2.js"></script>-->
+<!--<script src="/js/jquery.jqfeDropUploader.js"></script>-->
+<!--<script src="/js/jquery.jqfeProgressBarPage.js"></script>-->
+
+<script src="/js/cms.azbn.ru/cmsAPI.js"></script>
+
+<script type="text/javascript" src="/import/cms.azbn.ru/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
+<script type="text/javascript" src="/import/cms.azbn.ru/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css" href="/import/cms.azbn.ru/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+<!-- Add Button helper (this is optional) -->
+<script type="text/javascript" src="/import/cms.azbn.ru/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<link rel="stylesheet" type="text/css" href="/import/cms.azbn.ru/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+<!--
+Add Thumbnail helper (this is optional)
+<link rel="stylesheet" type="text/css" href="/import/cms.azbn.ru/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+<script type="text/javascript" src="/import/cms.azbn.ru/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+-->
+<!--
+Add Media helper (this is optional)
+<script type="text/javascript" src="/import/cms.azbn.ru/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+-->
+
+<script>
+
+$(document).ready(function() {
+	
+	//cmsAPI.call({service:'online',method:'check',callback:'CheckOnline'});
+	
+	cmsAPI.UI.OnReady.FancyboxConfig();
+	cmsAPI.UI.OnReady.FTSearchFilterOnClick();
+	cmsAPI.UI.OnReady.FaqSessionControl();
+	cmsAPI.UI.OnReady.FeedbackSessionControl();
+	cmsAPI.UI.OnReady.LiveEditInit();
+	
+	//$("body").eq(0).jqfeProgressBarPage({});
+	
+	});
+
+</script>
+
+</head>
+<body class="" >
+
+<?=$this->FE->config['metrika_counter'];?>
+
+<!--
+<div class="fe-dbg-line-h" style="top:220px;" ></div>
+<div class="fe-dbg-line-h" style="top:2200px;" ></div>
+<div class="fe-dbg-line-h" style="top:440px;" ></div>
+<div class="fe-dbg-line-h" style="top:3108px;" ></div>
+-->
+
+<div class="container"> <!-- container-fluid -->
+	
+	<div class="row" >
+		
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+			
+			<form class="form-signin" method="GET" action="/search/fulltext/" >
+				
+				<div class="row" >
+					
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+					
+						<ul class="list-inline">
+							<li><a href="/">главная</a></li>
+							<li><a href="/feedback/all/">обратная связь</a></li>
+							<li><a href="/faq/all/">faq</a></li>
+							
+							<li class="pull-right" >
+								<div class="dropdown">
+									<button class="btn btn-link dropdown-toggle inline-btn" type="button" id="profileMenuLink" data-toggle="dropdown" aria-expanded="true">
+										профиль
+										<span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="profileMenuLink">
+										
+										<?
+										if($_SESSION['profile']['id']) {
+										?>
+										<li role="presentation" ><a href="/profile/item/<?=$_SESSION['profile']['id'];?>/" role="menuitem" tabindex="-1" >Мой профиль</a></li>
+										<?
+										} else {
+										?>
+										<li role="presentation" ><a href="/profile/index/" role="menuitem" tabindex="-1" >Вход</a></li>
+										<li role="presentation" ><a href="/profile/registration/" role="menuitem" tabindex="-1">Регистрация</a></li>
+										<?
+										}
+										?>
+										
+										<?
+										if($_SESSION['user']['id']) {
+										?>
+										<li class="divider"></li>
+										<li role="presentation" ><a href="/admin/page/index/" role="menuitem" tabindex="-1" >Администрирование</a></li>
+										<?
+										} else {
+											
+										}
+										?>
+										
+										
+									</ul>
+								</div>
+							</li>
+						</ul>
+				
+					</div>
+					
+					
+					<div class="clear10" ></div>
+					
+				</div>
+				
+				<div class="input-group">
+					
+					<div class="input-group-addon"><img class="search-form-favicon" src="/img/cms.azbn.ru/favicon.png" /> azbn.ru</div>
+					
+					<input type="text" name="text" class="form-control" value="<?=$param['ftsearch']['text'];?>" placeholder="Что интересует?" required autofocus >
+					
+					<span class="input-group-btn">
+						<button class="btn btn-primary" type="submit" >Найти</button>
+					</span>
+				
+				</div>
+			
+			</form>
+			
+		</div>
+	
+	</div>
+	
+	<div class="clear20" ></div>
+	
+	<div class="row" >
+		
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sandbox" >
+	
+	<?
+		
+		/*
+		$this->view_banner(array(
+				'view_at'=>4,
+				'tpl'=>'banner/pages_top',
+				'limit'=>1,
+				'cache_time'=>36000,
+				'order_by'=>'rating'
+				), $param);
+		*/
+	
+	$this->FE->mem_mark('viewer->startofpage');
+		}
+	
+	public function endofpage(&$param)
+	{
+		?>
+		
+		</div>
+	
+	</div>
+
+</div> <!-- /container -->
+
+</body>
+</html><?
+	
+	$this->FE->mem_mark('viewer->endofpage');
+		}
+	
+	public function view_banner($banner=array('view_at'=>999999999, 'tpl'=>'banner/default', 'limit'=>1, 'cache_time'=>3600, 'order_by'=>'rating'),&$param)
+	{
+		$param['banner_list']=$this->FE->DB->dbSelect("SELECT * FROM `".$this->FE->DB->dbtables['t_banner']."` WHERE view_at='{$banner['view_at']}' ORDER BY {$banner['order_by']} LIMIT {$banner['limit']}");
+		$param['mdl']['banner_tpl']=$banner['tpl'];
+		$this->module('banner_tpl',$param,$banner['cache_time']);
+		}
+	
+	public function returnStrOrNbsp($str='')
+	{
+		return (mb_strlen($str)?$str:'&nbsp;');
+		}
+	
+}
+
+?>

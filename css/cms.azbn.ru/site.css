@@ -1,0 +1,48 @@
+body {
+	padding-top: 40px;
+	}
+a.navbar-brand {
+	color:#000000 !important;
+	/*padding: 10px;*/
+	}
+a.navbar-brand img {
+	max-width:30px;
+	}
+
+.leftmenu-catalog-item {
+	margin:0px 0px 0px 0px;
+	}
+	.leftmenu-catalog-item .children-items {
+		margin:0px 0px 0px 15px;
+		}
+
+.fancybox-btn {
+	display:block;
+	text-align:center;
+	height:200px;
+	padding:10px 0px;
+	}
+	.fancybox-btn img {
+		max-width:100%;
+		max-height:170px;
+		}
+	.fancybox-btn:hover img {
+		outline:1px #333333 solid;
+		}
+
+.liveedit-enable {
+	outline:1px groove red;
+	background-color:#F4F4F4;
+}
+
+.inline-btn {
+	padding:0px !important;
+}
+.input-group .input-group-addon {
+	font-size:12px !important;
+}
+.input-group .input-group-addon img.search-form-favicon {
+	min-width:12px !important;
+	width: 12px;
+	vertical-align: bottom;
+}

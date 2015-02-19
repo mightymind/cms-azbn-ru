@@ -1,0 +1,10 @@
+RewriteEngine on
+RewriteBase /
+RewriteCond $1/ !^(index\.php|img|js|css|upload|download|import)/
+
+#RewriteRule ^view/([^/]+)/([^/]+)/?$ /item/view/?type=$1&url=$2
+#RewriteRule ^view/([^/]+)/([^/]+)/?$ /item/view/$1/$2/
+#RewriteRule ^view/([^/]+)/?$ /item/cat/$1/$2/
+#RewriteRule ^view/([^/]+)/([^/]+)/?$ /index.php/item/view/$1/$2/
+
+RewriteRule ^(.*)$ /index.php/$1 [L]

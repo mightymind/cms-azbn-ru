@@ -1,0 +1,159 @@
+/* ----- Интерфейс ----- */
+img.icon {
+	max-width:24px;
+	max-height:24px;
+	}
+img.main_info_preview {
+	display:inline-block;
+	margin: 5px 10px;
+	max-width:200px;
+	max-height:200px;
+	}
+a:hover {
+	text-decoration:none;
+	}
+.page-header {
+	margin-top:0px !important;
+	}
+div.card-item-div {
+	min-height:220px;
+	height:220px;
+	overflow:hidden;
+	}
+	div.card-item-div img {
+		max-height:140px;
+		margin:3px auto;
+		}
+.absolute {
+	position:absolute;
+	}
+
+.visible0 {
+	background-color:#AAAAAA !important;
+	}
+.visible1 {
+	
+	}
+.status0 {
+	background-color:rgba(255,0,0,0.5) !important;
+	}
+.status1 {
+	background-color:rgba(0,0,0,0.2) !important;
+	}
+.status2 {
+	background-color:rgba(255,255,0,0.5) !important;
+	}
+.status3 {
+	background-color:rgba(0,255,0,0.5) !important;
+	}
+.live0 {
+	
+	}
+.live1 {
+	min-width:32px;
+	min-height:32px;
+	background-image: url(/img/57.zhazh.ru/live.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	}
+/* ----- /Интерфейс ----- */
+
+
+.param {
+	
+	}
+	.param-id {
+		
+		}
+	.param-name {
+		
+		}
+	.param-value {
+		
+		}
+
+.user {
+	
+	}
+	.user-id {
+		
+		}
+	.user-login {
+		
+		}
+	.user-status {
+		
+		}
+	.user-view_as {
+		
+		}
+	.user-img {
+		max-width:200px;
+		max-height:200px;
+		}
+	.user-rating {
+		
+		}
+	.user-cash {
+		
+		}
+
+.userright {
+	
+	}
+	.userright-right_id {
+		
+		}
+	.userright-right_name {
+		
+		}
+
+.apiapp {
+	
+	}
+	.apiapp-status {
+		
+		}
+	.apiapp-rating {
+		
+		}
+	.apiapp-login {
+		
+		}
+	.apiapp-app_key {
+		
+		}
+
+.entity {
+	
+	}
+	.entitycat {
+		
+		}
+	.entityitem {
+		
+		}
+	.entitydflt {
+		
+		}
+	.entityrel {
+		
+		}
+.fileman {
+	
+	}
+	.fileman .is-dir {
+		
+		}
+		.fileman .is-dir .dir-title {
+			font-weight:bold;
+			}
+		.fileman .is-dir .listing {
+			margin-left:15px;
+			}
+	.fileman .is-file {
+		
+		}
+		.fileman .is-file .file-title {
+			
+			}

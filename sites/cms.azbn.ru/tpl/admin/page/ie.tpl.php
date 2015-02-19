@@ -1,0 +1,12 @@
+<?
+$param['img_form']=array(
+	'name'=>'img',
+	'src'=>'/img/cms.azbn.ru/default.png',
+	'w'=>170,
+	//'h'=>170,
+	//'crop'=>1,
+	//'gray'=>0,
+	'path'=>'import/avatar_creator',
+	);
+$this->FE->Viewer->form('admin/avatar_creator_html',$param);
+?>
