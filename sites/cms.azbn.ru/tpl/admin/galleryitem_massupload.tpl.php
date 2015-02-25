@@ -18,7 +18,7 @@ $(document).ready(function() {
 		max_height:<?=$img['h']?>,
 		callback:function(dataURL){
 			
-			$.post('/admin/upload_dataurl/',{'path':'<?=$img['path']?>','img_to_save':dataURL},function(data){
+			$.post('/admin/upload/dataurl/',{'path':'<?=$img['path']?>','img_to_save':dataURL},function(data){
 				
 				AdminAPI.callbacks.MassUploadGalleryItem_<?=$uniq;?>=function(resp) {
 					

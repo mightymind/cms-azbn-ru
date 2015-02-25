@@ -68,7 +68,7 @@ $(document).ready(function() {
 		max_height:1000,
 		callback:function(dataURL){
 			
-			$.post('/admin/upload_dataurl/',{'path':'<?=$uipath;?>','img_to_save':dataURL},function(data){
+			$.post('/admin/upload/dataurl/',{'path':'<?=$uipath;?>','img_to_save':dataURL},function(data){
 				
 				//fe_insert_tag_<?=$uniq;?>('','<p><center><img src="'+data+'" width="" /></center></p>\n');
 				fe_insert_tag_<?=$uniq;?>('','<center><img src="'+data+'" width="" /></center>\n');
@@ -83,7 +83,7 @@ $(document).ready(function() {
 		});
 	
 	$('#fe-editor-somefileuploader-<?=$uniq;?>-files').jqfeDropUploader({
-		action:'/admin/upload_file/?path=<?=$ufpath;?>',
+		action:'/admin/upload/file/?path=<?=$ufpath;?>',
 		name:'uploading_file',
 		callback:function(file,response,counter){
 			

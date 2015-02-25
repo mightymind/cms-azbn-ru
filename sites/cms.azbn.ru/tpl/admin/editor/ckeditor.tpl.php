@@ -11,7 +11,7 @@ $(document).ready(function() {
 	CKEDITOR.replace('ck-editor-text-<?=$uniq;?>',{
 		allowedContent:true,
 		//filebrowserBrowseUrl: '/browser/browse.php',
-		filebrowserUploadUrl: '/admin/upload_import/?path=<?=$param['run_editor']['element']['upload_path'];?>',
+		filebrowserUploadUrl: '/admin/upload/import/?path=<?=$param['run_editor']['element']['upload_path'];?>',
 		});
 	});
 

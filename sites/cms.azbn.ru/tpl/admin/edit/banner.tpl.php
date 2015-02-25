@@ -7,7 +7,7 @@ $(document).ready(function(){
 	$('select[name="view_at"]').val(<?=$param['edit_el']['view_at'];?>);
 	
 	$('#banner-img-field').jqfeDropUploader({
-		action:'/admin/upload_file/?path=banner/img',
+		action:'/admin/upload/file/?path=banner/img',
 		name:'uploading_file',
 		callback:function(file,response,counter){
 			

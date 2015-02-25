@@ -26,7 +26,7 @@ $(document).ready(function() {
 				?>
 				callback:function(dataURL){
 					
-					$.post('/admin/upload_dataurl/',{'path':'<?=$param['img_form']['path'];?>','img_to_save':dataURL},function(data){
+					$.post('/admin/upload/dataurl/',{'path':'<?=$param['img_form']['path'];?>','img_to_save':dataURL},function(data){
 						$('#fe-pa-result-<?=$uniq;?>').val(data);
 						$('#div-PhotoAreaResult-<?=$uniq;?>').attr('src',data);
 						});

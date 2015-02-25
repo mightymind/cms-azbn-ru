@@ -29,7 +29,7 @@ $(document).ready(function() {
 	$('#fe-uplimg-upload-a-<?=$uniq;?>').hover(
 	function(){
 		$(this).jqfeFileUploader({
-			action:'/admin/upload_img/?w='+$('#fe-uplimg-upload-w-<?=$uniq;?>').val()+'&h='+$('#fe-uplimg-upload-h-<?=$uniq;?>').val()+'&crop='+($('#fe-uplimg-upload-crop-<?=$uniq;?>').prop('checked')?1:0)+'&gray='+($('#fe-uplimg-upload-gray-<?=$uniq;?>').prop('checked')?1:0)+'&path=<?=$img['path'];?>',
+			action:'/admin/upload/img/?w='+$('#fe-uplimg-upload-w-<?=$uniq;?>').val()+'&h='+$('#fe-uplimg-upload-h-<?=$uniq;?>').val()+'&crop='+($('#fe-uplimg-upload-crop-<?=$uniq;?>').prop('checked')?1:0)+'&gray='+($('#fe-uplimg-upload-gray-<?=$uniq;?>').prop('checked')?1:0)+'&path=<?=$img['path'];?>',
 			name:'icon_img',
 			callback:function(file){
 				setUplImgValue_<?=$uniq;?>(file);

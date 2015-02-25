@@ -5,7 +5,7 @@ if($_SESSION['user']['right']['change_banner']) {
 $(document).ready(function(){
 	
 	$('#banner-img-field').jqfeDropUploader({
-		action:'/admin/upload_file/?path=banner/img',
+		action:'/admin/upload/file/?path=banner/img',
 		name:'uploading_file',
 		callback:function(file,response,counter){
 			

@@ -84,7 +84,7 @@ $(document).ready(function() {
 			in_size:($('#fe-uplimg-upload-in_size-<?=$uniq;?>').prop('checked')?1:0),
 			callback:function(dataURL_){
 				
-				$.post('/admin/upload_dataurl/',{'path':'<?=$param['img_form']['path'];?>','img_to_save':dataURL_},function(data){
+				$.post('/admin/upload/dataurl/',{'path':'<?=$param['img_form']['path'];?>','img_to_save':dataURL_},function(data){
 					setUplImgValue_<?=$uniq;?>(data);
 					$('#create-img-for-el-modal-cansel-<?=$uniq;?>').trigger('click');
 					});
@@ -92,7 +92,7 @@ $(document).ready(function() {
 				},
 			callback_preview:function(dataURL_){
 				
-				$.post('/admin/upload_dataurl/',{'path':'<?=$param['img_form']['path'];?>','img_to_save':dataURL_},function(data){
+				$.post('/admin/upload/dataurl/',{'path':'<?=$param['img_form']['path'];?>','img_to_save':dataURL_},function(data){
 					setPreviewImgValue_<?=$uniq;?>(data);
 					$('#create-img-for-el-modal-cansel-<?=$uniq;?>').trigger('click');
 					});
@@ -109,14 +109,14 @@ $(document).ready(function() {
 		max_width:<?=$img['max_w'];?>,
 		max_height:<?=$img['max_h'];?>,
 		callback:function(dataURL){		
-			$.post('/admin/upload_dataurl/',{'path':'<?=$param['img_form']['path'];?>','img_to_save':dataURL},function(data){
+			$.post('/admin/upload/dataurl/',{'path':'<?=$param['img_form']['path'];?>','img_to_save':dataURL},function(data){
 				setUplImgValue_<?=$uniq;?>(data);
 			});
 		}
 	});
 	
 	$('#fe-uplimg-upload-orig-<?=$uniq;?>').jqfeDropImgUploader({
-		action:'/admin/upload_file/?realurl=1&path=<?=$param['img_form']['path'];?>',
+		action:'/admin/upload/file/?realurl=1&path=<?=$param['img_form']['path'];?>',
 		name:'uploading_file',
 		callback:function(file,response,counter){
 			
