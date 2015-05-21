@@ -13,7 +13,23 @@ $(document).ready(function() {
 		$('#gi-uploader-someimguploader-<?=$uniq;?>').jqfeModal();
 		});
 	
-	$('#gi-uploader-someimguploader-<?=$uniq;?>-imgs').jqfeDropImgOptimizer2({
+	$('#gi-uploader-someimguploader-<?=$uniq;?>-imgs')
+		.css({
+			'display': 'block',
+			'cursor': 'pointer',
+			'color': '#555555',
+			'font-size': '18px',
+			'font-weight': 'bold',
+			'text-align': 'center',
+			'padding': '50px 0px',
+			'margin': '0px auto',
+			'border': '1px solid',
+			'-webkit-border-radius': '7px',
+			'-moz-border-radius': '7px',
+			'border-radius': '7px',
+			//'content': 'Перетащите файлы сюда или нажмите на меня для их выбора',
+			})
+		.jqfeDropImgOptimizer2({
 		max_width:<?=$img['w']?>,
 		max_height:<?=$img['h']?>,
 		callback:function(dataURL){

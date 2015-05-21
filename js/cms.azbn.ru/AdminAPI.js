@@ -315,8 +315,9 @@ callbacks:{
 					item_div
 						.on('click',function() {
 							//eval( 'setUplImgValue_'+resp.req.load_to+'("'+$(this).attr('data-img')+'")' );
-							$('#fe-uplimg-'+resp.req.load_to+' input#fe-uplimg-input-'+resp.req.load_to).val(item.img);
-							$('#fe-uplimg-'+resp.req.load_to+' img#fe-uplimg-img-'+resp.req.load_to).attr('src',item.img);
+							var _img = $(this).attr('data-img');
+							$('#fe-uplimg-'+resp.req.load_to+' input#fe-uplimg-input-'+resp.req.load_to).val(_img);
+							$('#fe-uplimg-'+resp.req.load_to+' img#fe-uplimg-img-'+resp.req.load_to).attr('src',_img);
 						})
 						.attr('data-img',item.img)
 						.attr('data-dismiss','modal')
