@@ -43,10 +43,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/seo_select_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="rating" >Рейтинг</label>
-				<input type="number" class="form-control" name="rating" max="999999999" min="1" value="999999999" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/rating_input_html',$param);
+			?>
 			
 			<div class="form-group">
 				<label for="cash" >Сумма на счете</label>

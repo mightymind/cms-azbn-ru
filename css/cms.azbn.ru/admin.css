@@ -15,18 +15,22 @@ a:hover {
 .page-header {
 	margin-top:0px !important;
 	}
-div.card-item-div {
+.card-item-div {
+	display:inline-block;
 	min-height:220px;
 	height:220px;
 	overflow:hidden;
 	}
-	div.card-item-div img {
+	.card-item-div img {
 		max-height:140px;
 		margin:3px auto;
 		}
 .absolute {
 	position:absolute;
 	}
+.cursor-pointer {
+	cursor:pointer;
+}
 
 .visible0 {
 	background-color:#AAAAAA !important;

@@ -20,10 +20,9 @@ $(document).ready(function(){
 		
 		<form action="/admin/update/entity/<?=$param['edit_el']['id'];?>/" method="POST" >
 			
-			<div class="form-group">
-				<label for="title" >Заголовок</label>
-				<input class="form-control" type="text" name="title" value="<?=$param['edit_el']['title'];?>" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/title_input_html',$param);
+			?>
 			
 			<div class="form-group">
 				<label for="url" >URL</label>

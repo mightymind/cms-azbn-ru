@@ -32,6 +32,12 @@ $(document).ready(function() {
 			}
 		});
 	
+	$('#select-from-galleryitem-modal-galselect-<?=$uniq;?>').on('change',function(){
+		//alert($(this).find('option:selected').attr('value'));
+		$('#select-from-galleryitem-modal-imglist-<?=$uniq;?>').html('');
+		AdminAPI.call({service:'galleryitem', method:'by_gallery', 'gal':$(this).find('option:selected').attr('value'), 'load_to':'<?=$uniq;?>', callback:'GetItemsFromGallery'});
+		});
+	
 	<?
 	if($_SESSION['user']['right']['upload_avatar']) {
 	?>
@@ -239,6 +245,91 @@ $(document).ready(function() {
 	</div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="select-from-galleryitem-modal-<?=$uniq;?>" tabindex="-1" role="dialog" aria-labelledby="mySelectModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="mySelectModalLabel">Выбор изображения</h4>
+			</div>
+		
+			<div class="modal-body">
+			
+				<div class="row">
+					
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						
+						<div class="form-group">
+							<label for="parent" >Галерея</label>
+							<select class="form-control" id="select-from-galleryitem-modal-galselect-<?=$uniq;?>" >
+								<option value="0" >Выберите галерею</option>
+								<?
+								
+								$ilist=$this->FE->DB->dbSelect("SELECT * FROM `".$this->FE->DB->dbtables['t_gallery']."` ORDER BY id");
+
+								$catalog=array(
+									'list'=>array(),
+									'structure'=>array()
+									);
+
+								if(mysql_num_rows($ilist)) {
+									while($row=mysql_fetch_array($ilist)) {
+										$catalog['list'][$row['id']]=$row;
+										$catalog['structure'][$row['parent']][$row['id']]=&$catalog['list'][$row['id']];
+										}
+									mysql_data_seek($ilist,0);
+									}
+								
+								if(count($catalog['structure'][0])) {
+									foreach($catalog['structure'][0] as $index=>$entity) {
+										showGalleryWithChildren($catalog,$index);
+										}
+									}
+								
+								function showGalleryWithChildren(&$catalog,$entity_id,$tab="- ") {
+									?>
+									<option value="<?=$entity_id;?>" ><?=$tab.$catalog['list'][$entity_id]['title'];?></option>
+									<?
+									if(count($catalog['structure'][$entity_id])) {
+										foreach($catalog['structure'][$entity_id] as $index=>$entity) {
+											showGalleryWithChildren($catalog,$index,$tab.$tab);
+											}
+										}
+									}
+								
+								?>
+							</select>
+						</div>
+						
+					</div>
+					
+					<div class="clear10" ></div>
+					
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="row" id="select-from-galleryitem-modal-imglist-<?=$uniq;?>" >
+							
+						</div>
+					</div>
+					
+					<div class="clear10" ></div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" id="select-from-galleryitem-modal-cansel-<?=$uniq;?>" class="btn btn-default" data-dismiss="modal" >Отмена</button>
+				<!--<button type="button" id="create-img-for-el-modal-create-<?=$uniq;?>" class="btn btn-primary" data-dismiss="modal" >Создать</button>-->
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
 <div class="well well-sm">
 	
 	<div class="row">
@@ -256,6 +347,7 @@ $(document).ready(function() {
 				}
 			?>
 			<p><a href="#bylink" class="btn btn-primary btn-block" id="fe-uplimg-import-a-<?=$uniq;?>" >по ссылке без копирования</a></p>
+			<p><a href="#bygalleryitem" class="btn btn-primary btn-block" id="fe-uplimg-galleryitem-a-<?=$uniq;?>" data-toggle="modal" data-target="#select-from-galleryitem-modal-<?=$uniq;?>" >выбрать из галерей</a></p>
 			
 		</div>
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

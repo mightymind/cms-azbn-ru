@@ -292,6 +292,58 @@ callbacks:{
 		}
 		
 		},
+	
+	GetItemsFromGallery:function(resp) {
+		
+		if(resp.req.load_to) {
+			
+			var div = $('#select-from-galleryitem-modal-imglist-'+resp.req.load_to);
+			
+			if(resp.response.item_list) {
+				
+				for(var i=0; i<resp.response.item_list.length; i++) {
+					var item=resp.response.item_list[i];
+					var item_img = $('<img/>',{
+						src : item.img,
+						title : item.title,
+					});
+					var item_div = $('<div/>',{
+						class : 'card-item-div cursor-pointer col-xs-6 col-sm-6 col-md-4 col-lg-4',
+						html : '',
+					});
+					item_img.appendTo(item_div);
+					item_div
+						.on('click',function() {
+							//eval( 'setUplImgValue_'+resp.req.load_to+'("'+$(this).attr('data-img')+'")' );
+							$('#fe-uplimg-'+resp.req.load_to+' input#fe-uplimg-input-'+resp.req.load_to).val(item.img);
+							$('#fe-uplimg-'+resp.req.load_to+' img#fe-uplimg-img-'+resp.req.load_to).attr('src',item.img);
+						})
+						.attr('data-img',item.img)
+						.attr('data-dismiss','modal')
+						.appendTo(div);
+					/*
+					var item_a=$('<a/>',{
+						href:'#add2list',
+						html:'<img class="icon" src="/img/cms.azbn.ru/add.png" />',
+						onClick:"AdminAPI.UI.addItem2LinkingCardsList('"+item.id+"','"+item.img+"','"+item.title+"');"
+						});
+					var item_p=$('<p/>');
+					item_p.append(item_a);
+					item_p.append(' '+item.title);
+					item_p.appendTo(div);
+					*/
+					}
+					
+				} else {
+					
+					
+					
+					}
+			
+		}
+		
+		//alert(resp.response.item_list.length);
+		},
 		
 	}
 

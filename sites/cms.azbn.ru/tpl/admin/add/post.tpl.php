@@ -17,23 +17,18 @@ $(document).ready(function(){
 		
 		<form action="/admin/create/post/" method="POST" >
 			
-			<div class="form-group">
-				<label for="title" >Заголовок</label>
-				<input class="form-control" type="text" name="title" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/title_input_html',$param);
+			?>
 			
 			<div class="form-group">
 				<label for="url" >URL</label>
 				<input class="form-control" type="text" name="url" />
 			</div>
 			
-			<div class="form-group">
-				<label for="visible" >Видимость</label>
-				<select class="form-control" name="visible" >
-					<option value="1" >отображать на сайте</option>
-					<option value="0" >скрыть запись</option>
-				</select>
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/visible_select_html',$param);
+			?>
 			
 			<?
 			$this->FE->Viewer->form('admin/postcat_select_html',$param);
@@ -43,10 +38,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/seo_select_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="rating" >Рейтинг</label>
-				<input type="number" class="form-control" name="rating" max="999999999" min="1" value="999999999" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/rating_input_html',$param);
+			?>
 			
 			<div class="form-group">
 				<label for="img" >Изображение</label>

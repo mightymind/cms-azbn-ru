@@ -24,15 +24,13 @@
 				</select>
 			</div>
 			
-			<div class="form-group">
-				<label for="title" >Заголовок</label>
-				<input class="form-control" type="text" name="title" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/title_input_html',$param);
+			?>
 			
-			<div class="form-group">
-				<label for="rating" >Рейтинг</label>
-				<input type="number" class="form-control" name="rating" max="999999999" min="1" value="999999999" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/rating_input_html',$param);
+			?>
 			
 			<?
 			$param['run_editor']=array(

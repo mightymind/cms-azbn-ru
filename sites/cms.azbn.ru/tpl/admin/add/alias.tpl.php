@@ -18,17 +18,17 @@ $(document).ready(function(){
 		<form action="/admin/create/alias/" method="POST" >
 			
 			<div class="form-group">
-				<label for="title" >Тип контента</label>
+				<label for="type" >Тип контента</label>
 				<input class="form-control" type="text" name="type" value="text/html" />
 			</div>
 			
 			<div class="form-group">
-				<label for="title" >Перенаправлять с адреса</label>
+				<label for="req" >Перенаправлять с адреса</label>
 				<input class="form-control" type="text" name="req" value="/adr_from" />
 			</div>
 			
 			<div class="form-group">
-				<label for="title" >Перенаправлять на адрес</label>
+				<label for="to" >Перенаправлять на адрес</label>
 				<input class="form-control" type="text" name="to" value="/adr_to" />
 			</div>
 			

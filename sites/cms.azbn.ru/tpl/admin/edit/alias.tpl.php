@@ -24,17 +24,17 @@ $(document).ready(function(){
 		<form action="/admin/update/alias/<?=$param['edit_el']['id'];?>" method="POST" >
 			
 			<div class="form-group">
-				<label for="title" >Тип контента</label>
+				<label for="type" >Тип контента</label>
 				<input class="form-control" type="text" name="type" value="<?=$param['edit_el']['type'];?>" />
 			</div>
 			
 			<div class="form-group">
-				<label for="title" >Перенаправлять с адреса</label>
+				<label for="req" >Перенаправлять с адреса</label>
 				<input class="form-control" type="text" name="req" value="<?=$param['edit_el']['req'];?>" />
 			</div>
 			
 			<div class="form-group">
-				<label for="title" >Перенаправлять на адрес</label>
+				<label for="to" >Перенаправлять на адрес</label>
 				<input class="form-control" type="text" name="to" value="<?=$param['edit_el']['to'];?>" />
 			</div>
 			

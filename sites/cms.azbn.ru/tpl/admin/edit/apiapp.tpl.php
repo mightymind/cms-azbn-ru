@@ -27,10 +27,9 @@
 									</select>
 								</div>
 								
-								<div class="form-group">
-									<label for="rating" >Рейтинг</label>
-									<input type="number" class="form-control" name="rating" max="999999999" min="1" value="<?=$param['edit_el']['rating'];?>" />
-								</div>
+								<?
+								$this->FE->Viewer->form('admin/rating_input_html',$param);
+								?>
 								
 								<div class="form-group">
 									<label for="pass" >Пароль (будет зашифрован)</label>

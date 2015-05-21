@@ -23,23 +23,18 @@ $(document).ready(function(){
 		
 		<form action="/admin/update/news/<?=$param['edit_el']['id'];?>/" method="POST" >
 			
-			<div class="form-group">
-				<label for="title" >Заголовок</label>
-				<input class="form-control" type="text" name="title" value="<?=$param['edit_el']['title'];?>" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/title_input_html',$param);
+			?>
 			
 			<div class="form-group">
 				<label for="url" >URL</label>
 				<input class="form-control" type="text" name="url" value="<?=$param['edit_el']['url'];?>" />
 			</div>
 			
-			<div class="form-group">
-				<label for="visible" >Видимость</label>
-				<select class="form-control" name="visible" >
-					<option value="1" >отображать на сайте</option>
-					<option value="0" >скрыть запись</option>
-				</select>
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/visible_select_html',$param);
+			?>
 			
 			<?
 			if($_SESSION['user']['right']['change_news_superuser']) {
@@ -55,10 +50,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/seo_select_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="rating" >Рейтинг</label>
-				<input type="number" class="form-control" name="rating" max="999999999" min="1" value="<?=$param['edit_el']['rating'];?>" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/rating_input_html',$param);
+			?>
 			
 			<div class="row">
 				

@@ -38,10 +38,9 @@
 				</select>
 			</div>
 			
-			<div class="form-group">
-				<label for="title" >Название задания</label>
-				<input class="form-control" type="text" name="title" value="<?=$param['edit_el']['title'];?>" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/title_input_html',$param);
+			?>
 			
 			<div class="form-group">
 				<label for="status" >Статус задания</label>
@@ -53,10 +52,9 @@
 				</select>
 			</div>
 			
-			<div class="form-group">
-				<label for="rating" >Рейтинг</label>
-				<input type="number" class="form-control" name="rating" max="999999999" min="1" value="<?=$param['edit_el']['rating'];?>" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/rating_input_html',$param);
+			?>
 			
 			<?
 			$param['run_editor']=array(

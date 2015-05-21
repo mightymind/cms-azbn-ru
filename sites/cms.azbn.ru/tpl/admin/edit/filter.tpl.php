@@ -21,18 +21,13 @@ $(document).ready(function(){
 		
 		<form action="/admin/update/filter/<?=$param['edit_el']['id'];?>/" method="POST" >
 			
-			<div class="form-group">
-				<label for="title" >Заголовок</label>
-				<input class="form-control" type="text" name="title" value="<?=$param['edit_el']['title'];?>" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/title_input_html',$param);
+			?>
 			
-			<div class="form-group">
-				<label for="visible" >Видимость</label>
-				<select class="form-control" name="visible" >
-					<option value="1" >отображать на сайте</option>
-					<option value="0" >скрыть запись</option>
-				</select>
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/visible_select_html',$param);
+			?>
 			
 			<?
 			$this->FE->Viewer->form('admin/filter_select_html',$param);

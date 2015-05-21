@@ -16,10 +16,9 @@ $(document).ready(function(){
 		
 		<form action="/admin/create/entity/" method="POST" >
 			
-			<div class="form-group">
-				<label for="title" >Заголовок</label>
-				<input class="form-control" type="text" name="title" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/title_input_html',$param);
+			?>
 			
 			<div class="form-group">
 				<label for="url" >URL</label>
