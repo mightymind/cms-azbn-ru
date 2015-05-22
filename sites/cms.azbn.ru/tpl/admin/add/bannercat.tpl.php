@@ -44,10 +44,9 @@ $(document).ready(function(){
 				?>
 			</div>
 			
-			<div class="form-group">
-				<label for="preview" >Пояснение</label>
-				<textarea class="form-control" name="preview" ></textarea>
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/preview_textarea_html',$param);
+			?>
 			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success" >Создать позицию</button>

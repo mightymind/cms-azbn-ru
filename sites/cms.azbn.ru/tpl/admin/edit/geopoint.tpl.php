@@ -27,10 +27,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/title_input_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="url" >URL</label>
-				<input class="form-control" type="text" name="url" value="<?=$param['edit_el']['url'];?>" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/url_input_html',$param);
+			?>
 			
 			<?
 			$this->FE->Viewer->form('admin/visible_select_html',$param);
@@ -92,10 +91,9 @@ $(document).ready(function(){
 				?>
 			</div>
 			
-			<div class="form-group">
-				<label for="preview" >Краткое содержание</label>
-				<textarea class="form-control" name="preview" ><?=$param['edit_el']['preview'];?></textarea>
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/preview_textarea_html',$param);
+			?>
 			
 			<?
 			$param['run_editor']=array(
@@ -108,10 +106,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/form_editor_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="tag" >Теги (через точку с запятой!)</label>
-				<input class="form-control" type="text" name="tag" value="<?=$param['edit_el']['tag'];?>" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/tag_input_html',$param);
+			?>
 			
 			<?
 			$this->FE->Viewer->form('admin/gal_select_html',$param);

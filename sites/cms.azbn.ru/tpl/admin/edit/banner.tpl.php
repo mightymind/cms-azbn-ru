@@ -42,10 +42,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/title_input_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="url" >Ссылка, куда ведет баннер</label>
-				<input class="form-control" type="text" name="url" value="<?=$param['edit_el']['url'];?>" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/url_input_html',$param);
+			?>
 			
 			<?
 			$this->FE->Viewer->form('admin/rating_input_html',$param);

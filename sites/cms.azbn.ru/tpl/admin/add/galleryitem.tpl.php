@@ -21,10 +21,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/title_input_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="url" >URL</label>
-				<input class="form-control" type="text" name="url" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/url_input_html',$param);
+			?>
 			
 			<?
 			$this->FE->Viewer->form('admin/visible_select_html',$param);
@@ -69,10 +68,9 @@ $(document).ready(function(){
 				?>
 			</div>
 			
-			<div class="form-group">
-				<label for="tag" >Теги (через точку с запятой!)</label>
-				<input class="form-control" type="text" name="tag" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/tag_input_html',$param);
+			?>
 			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success" >Создать запись</button>

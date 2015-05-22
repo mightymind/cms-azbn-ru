@@ -20,10 +20,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/title_input_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="url" >URL</label>
-				<input class="form-control" type="text" name="url" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/url_input_html',$param);
+			?>
 			
 			<?
 			$this->FE->Viewer->form('admin/visible_select_html',$param);
@@ -63,12 +62,7 @@ $(document).ready(function(){
 			
 			<?
 			if($param['entity']['param']['field']['cat']['preview']) {
-			?>
-			<div class="form-group">
-				<label for="preview" >Пояснение</label>
-				<textarea class="form-control" name="preview" ></textarea>
-			</div>
-			<?
+				$this->FE->Viewer->form('admin/preview_textarea_html',$param);
 			}
 			?>
 			

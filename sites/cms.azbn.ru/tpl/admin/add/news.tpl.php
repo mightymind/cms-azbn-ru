@@ -20,10 +20,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/title_input_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="url" >URL</label>
-				<input class="form-control" type="text" name="url" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/url_input_html',$param);
+			?>
 			
 			<?
 			$this->FE->Viewer->form('admin/visible_select_html',$param);
@@ -91,15 +90,13 @@ $(document).ready(function(){
 				?>
 			</div>
 			
-			<div class="form-group">
-				<label for="param[yt_video]" >Ссылка на страницу видео на YouTube</label>
-				<input class="form-control" type="text" name="param[yt_video]" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/yt_video_input_html',$param);
+			?>
 			
-			<div class="form-group">
-				<label for="preview" >Краткое содержание</label>
-				<textarea class="form-control" name="preview" ></textarea>
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/preview_textarea_html',$param);
+			?>
 			
 			<?
 			$param['run_editor']=array(
@@ -112,10 +109,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/form_editor_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="tag" >Теги (через точку с запятой!)</label>
-				<input class="form-control" type="text" name="tag" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/tag_input_html',$param);
+			?>
 			
 			<?
 			$this->FE->Viewer->form('admin/gal_select_html',$param);

@@ -28,10 +28,9 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/title_input_html',$param);
 			?>
 			
-			<div class="form-group">
-				<label for="url" >URL</label>
-				<input class="form-control" type="text" name="url" value="<?=$param['edit_el']['url'];?>" />
-			</div>
+			<?
+			$this->FE->Viewer->form('admin/url_input_html',$param);
+			?>
 			
 			<?
 			$this->FE->Viewer->form('admin/visible_select_html',$param);
@@ -138,24 +137,14 @@ $(document).ready(function(){
 			
 			<?
 			if($param['entity']['param']['field']['item']['yt_video']) {
-			?>
-			<div class="form-group">
-				<label for="param[yt_video]" >Ссылка на страницу видео на YouTube</label>
-				<input class="form-control" type="text" name="param[yt_video]" value="http://www.youtube.com/watch?v=<?=$param['edit_el']['param']['yt_video'];?>" />
-			</div>
-			<?
+				$this->FE->Viewer->form('admin/yt_video_input_html',$param);
 			}
 			?>
 			
 			
 			<?
 			if($param['entity']['param']['field']['item']['preview']) {
-			?>
-			<div class="form-group">
-				<label for="preview" >Краткое содержание</label>
-				<textarea class="form-control" name="preview" ><?=$param['edit_el']['preview'];?></textarea>
-			</div>
-			<?
+				$this->FE->Viewer->form('admin/preview_textarea_html',$param);
 			}
 			?>
 			
@@ -247,12 +236,7 @@ $(document).ready(function(){
 			
 			<?
 			if($param['entity']['param']['field']['item']['tag']) {
-			?>
-			<div class="form-group">
-				<label for="tag" >Теги (через точку с запятой!)</label>
-				<input class="form-control" type="text" name="tag" value="<?=$param['edit_el']['tag'];?>" />
-			</div>
-			<?
+				$this->FE->Viewer->form('admin/tag_input_html',$param);
 			}
 			?>
 			
