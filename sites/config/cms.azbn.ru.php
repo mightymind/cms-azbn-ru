@@ -23,6 +23,7 @@ $CONFIG=array(
 	'app_path'=>'apps',
 	'phpmorphy_path'=>'/var/www/phpmorphy/0.3.7/',
 	'backup_path'=>'backup',
+	'plugin_path'=>'plugin',
 	
 	'main_app'=>'Main',
 	'main_app_function'=>'index',
@@ -47,6 +48,7 @@ $CONFIG=array(
 		't_cache'=>$prefix.'_cache',
 		't_log'=>$prefix.'_log',
 		't_entity'=>$prefix.'_entity',
+		't_plugin'=>$prefix.'_plugin',
 		
 		't_user'=>$prefix.'_user',
 		't_userright'=>$prefix.'_userright',

@@ -129,23 +129,6 @@ public $class_name='adminviewer';
 					$('table.userright-as-table').find('input[type=checkbox]').prop('checked', false);
 					});
 				
-				$('input[name="title"]').on('blur',function(){
-					if($('input[name="url"]').val()=='') {
-						AdminAPI.call({service:'fe', method:'ru2en', 'title':$(this).val(), callback:'GenURLFromTitle'});
-					}
-				});
-				
-				/*
-					$('input[name="url"]').popover({
-						html:true,
-						animation:true,
-						placement:'bottom',
-						title:'Важно!',
-						content:'Поле <b>url</b> используется для выборки записи. Должно быть уникальным',
-						//template:'<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
-					}).popover('show');
-					*/
-				
 				//if(typeof keys[event.keyCode] !== 'undefined'){
 				
 			});
@@ -267,16 +250,14 @@ public $class_name='adminviewer';
 							$this->FE->Viewer->module('menu_entityitem_list',$param);
 							?>
 							
-						</ul>
-					</div>
-				</li>
-				
-				<li>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							<img class="icon" src="/img/cms.azbn.ru/cat_menu.png" /> Разделы <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
+							
+							
+							
+							<li class="divider" ></li>
+							
+							
+							
+							
 							
 							<?
 							if($_SESSION['user']['right']['change_pagecat_edit']) {
@@ -329,6 +310,21 @@ public $class_name='adminviewer';
 							<?
 							$param['mdl']['menu_entitycat_list']='admin/menu_entitycat_list';
 							$this->FE->Viewer->module('menu_entitycat_list',$param);
+							?>
+							
+						</ul>
+					</div>
+				</li>
+				
+				<li>
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							<img class="icon" src="/img/cms.azbn.ru/plugin.png" /> Плагины <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							
+							<?
+							$this->FE->PluginMng->event('viewer_menu_plugin_list', $param);
 							?>
 							
 						</ul>
@@ -445,6 +441,14 @@ public $class_name='adminviewer';
 							}
 							?>
 							
+							<?
+							if($_SESSION['user']['right']['access_plugin']) {
+							?>
+							<li><a href="/admin/all/plugin/" ><img class="icon" src="/img/cms.azbn.ru/plugin.png" /> Плагины</a></li>
+							<?
+							}
+							?>
+							
 							
 							<li class="divider"></li>
 							
@@ -521,7 +525,7 @@ public $class_name='adminviewer';
 				
 				<li class="pull-right" >
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 							<img class="icon" src="/img/cms.azbn.ru/add.png" /><span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
@@ -612,8 +616,10 @@ public $class_name='adminviewer';
 <!--<div class="btn-group-vertical btn-block" role="group" ></div>-->
 			
 			<?
-			$param['mdl']['hot_updates']='admin/hot_updates';
-			$this->FE->Viewer->module_live('hot_updates',$param);
+			//$param['mdl']['hot_updates']='admin/hot_updates';
+			//$this->FE->Viewer->module_live('hot_updates',$param);
+			//
+			$this->FE->PluginMng->event('viewer_leftcol_widget', $param);
 			?>
 			
 		</div>

@@ -9,6 +9,14 @@ public $class_name='login';
 	{
 		//$_SESSION['tmp']['back_url']=$_SERVER['REQUEST_URI'];
 		}
+	
+	public function loadPluginMng()
+	{
+		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
+			$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
+			$this->FE->PluginMng->loadPlugins($this->class_name);
+		}
+	}
 		
 	public function index(&$param)
 	{
@@ -47,6 +55,9 @@ public $class_name='login';
 					$_SESSION['user']['right'][$right_id]=1;
 					}
 				}
+			
+			$this->loadPluginMng();
+			$this->FE->PluginMng->event('login_start_after', $param);
 			
 			$this->FE->go2('/admin/');
 			} else {

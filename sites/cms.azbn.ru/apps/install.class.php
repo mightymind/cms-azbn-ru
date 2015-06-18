@@ -10,6 +10,14 @@ public $class_name='install';
 		
 		}
 	
+	public function loadPluginMng()
+	{
+		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
+			$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
+			$this->FE->PluginMng->loadPlugins($this->class_name);
+		}
+	}
+	
 	public function clear(&$param)
 	{
 		/*
@@ -22,6 +30,8 @@ public $class_name='install';
 		@copy('litedb/cms.azbn.ru','litedb/'.$this->FE->config['site']);
 		@copy('upload/cms.azbn.ru','upload/'.$this->FE->config['site']);
 		*/
+		
+		$this->loadPluginMng();
 		
 		echo '<hr />';
 		
@@ -54,6 +64,26 @@ public $class_name='install';
 			$this->FE->DB->dbQuery("DROP TABLE `".$this->FE->config['mysql_prefix'].'_'.$row['url']."`");
 		}
 		echo 'Entities are deleted.<br />';
+		
+		
+		/*
+		function removePluginDir($path) {
+			if (is_file($path)) {
+				@unlink($path);
+			} else {
+				array_map('removePluginDir',glob('/*')) == @rmdir($path);
+			}
+			@rmdir($path);
+		}
+		*/
+		
+		$plugins=$this->FE->DB->dbSelect("SELECT * FROM `".$this->FE->DB->dbtables['t_plugin']."` WHERE 1 ORDER BY rating, id");
+		while($row=mysql_fetch_array($plugins)) {
+			$this->FE->PluginMng->removePluginDirectory($this->FE->PluginMng->getPluginDirectory($row['id']));
+		}
+		echo 'Plugins are deleted.<br />';//die();
+		
+		
 		
 		echo '<hr />';
 		
@@ -226,6 +256,42 @@ public $class_name='install';
 				echo 'Table <b>'.$table_name.'</b> <b>is not</b> installed<br />';
 				}
 		
+		$table_name=$this->FE->DB->dbtables['t_plugin'];
+		if($this->FE->DB->dbQuery("CREATE TABLE IF NOT EXISTS `$table_name` (
+		`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		`azbn_id` INT DEFAULT '0',
+		`azbn_cat` INT DEFAULT '0',
+		`status` INT DEFAULT '1',
+		`created_at` INT DEFAULT '0',
+		`rating` INT DEFAULT '999999999',
+		`uid` VARCHAR(256) DEFAULT '',
+		`tag` VARCHAR(256) DEFAULT '',
+		`title` VARCHAR(256) DEFAULT '',
+		`preview` VARCHAR(512) DEFAULT '',
+		`event` BLOB DEFAULT '',
+		`param` BLOB DEFAULT ''
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+		")) {
+			echo 'Table <b>'.$table_name.'</b> is installed<br />';
+			} else {
+				echo 'Table <b>'.$table_name.'</b> <b>is not</b> installed<br />';
+				}
+		/*
+		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_plugin'],array(
+			'azbn_id'=>'1',
+			'azbn_cat'=>'0',
+			'status'=>'1',
+			'created_at'=>$this->FE->date,
+			'rating'=>999999999,
+			'uid'=>'Testplugin',
+			'title'=>'Тестовый плагин',
+			'preview'=>'Тестовый плагин для отработки механизма плагинов в CMS Azbn.ru',
+			'event'=>'test_event',
+			'param'=>'',
+			)
+		);
+		*/
+		
 		
 		$table_name=$this->FE->DB->dbtables['t_entity'];
 		if($this->FE->DB->dbQuery("CREATE TABLE IF NOT EXISTS `$table_name` (
@@ -278,6 +344,8 @@ public $class_name='install';
 		
 		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_userright'],array('right_id'=>'change_userright_structure','right_name'=>'Изменение структуры уровней доступа'));
 		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_userright'],array('right_id'=>'change_user','right_name'=>'Изменение данных и прав администраторов'));
+		
+		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_userright'],array('right_id'=>'access_plugin','right_name'=>'Доступ к управлению плагинами'));
 		
 		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_userright'],array('right_id'=>'change_apiapp','right_name'=>'Добавление/изменение приложений API'));
 		
