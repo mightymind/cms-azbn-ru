@@ -20,9 +20,13 @@ $FE->DB->_init($FE->config);
 $FE->load(array('path'=>$FE->config['sys_path'],'class'=>'Cache','var'=>'Cache'));
 //$FE->load(array('path'=>$FE->config['sys_path'],'class'=>'LiteDB','var'=>'LDB'));
 $FE->load(array('path'=>$FE->config['app_path'],'class'=>'CMSAzbn','var'=>'CMS'));
+$FE->load(array('path'=>$FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
+$FE->PluginMng->loadPlugins('cms', true);
 
 session_start();
 $FE->CMS->setTimeZone();
+
+$FE->FE->PluginMng->event('cms:session_start', $param);
 
 // запуск нужного класса по данным пользовательского запроса
 $req_arr=$FE->CMS->getReqParams();
@@ -34,13 +38,7 @@ $FE->run_app(array(
 		'req_arr'=>$req_arr['req_arr'],
 		)));
 
-// сохранение данных о потребляемой памяти
-
-//$FE->setLazy('SaveMemoryInfo','SaveMemoryInfo',$req_arr);
-//$FE->runLazy('SaveMemoryInfo');
-
-$FE->setLazy('ShowMemoryInfoInAdmin','ShowMemoryInfoInAdmin',$req_arr);
-$FE->runLazy('ShowMemoryInfoInAdmin');
+$FE->FE->PluginMng->event('cms:unload', $req_arr);
 /*
 // выгрузка запущенных классов
 $FE->unload('CMS');
@@ -48,6 +46,7 @@ $FE->unload('CMS');
 $FE->unload('Cache');
 $FE->DB->dbDestroy();
 $FE->unload('DB');
+$FE->unload('PluginMng');
 $FE->destroy();
 */
 ?>

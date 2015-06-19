@@ -46,11 +46,11 @@ if($_SESSION['user']['right']['access_usertask']) {
 		while($row=mysql_fetch_array($param['usertask4working'])) {
 			if($row['status']) {
 				?>
-				<div class="alert alert-warning" ><a href="/admin/page/view_usertask/<?=$row['id'];?>" ><?=$row['name'];?></a></div>
+				<div class="alert alert-warning" ><a href="/admin/page/view_usertask/<?=$row['id'];?>" ><?=$row['title'];?></a></div>
 				<?
 				} else {
 					?>
-					<div class="alert alert-danger" ><a href="/admin/page/view_usertask/<?=$row['id'];?>" ><?=$row['name'];?></a></div>
+					<div class="alert alert-danger" ><a href="/admin/page/view_usertask/<?=$row['id'];?>" ><?=$row['title'];?></a></div>
 					<?
 					}
 			}

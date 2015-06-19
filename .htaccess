@@ -1,10 +1,13 @@
 RewriteEngine on
 RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
 RewriteCond $1/ !^(index\.php|img|js|css|upload|download|import)/
+RewriteRule ^(.*)$ /index.php/$1 [L]
 
 #RewriteRule ^view/([^/]+)/([^/]+)/?$ /item/view/?type=$1&url=$2
 #RewriteRule ^view/([^/]+)/([^/]+)/?$ /item/view/$1/$2/
 #RewriteRule ^view/([^/]+)/?$ /item/cat/$1/$2/
 #RewriteRule ^view/([^/]+)/([^/]+)/?$ /index.php/item/view/$1/$2/
-
-RewriteRule ^(.*)$ /index.php/$1 [L]

@@ -10,11 +10,15 @@ public $class_name='install';
 		
 		}
 	
-	public function loadPluginMng()
+	public function loadPluginMng($tag='')
 	{
 		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
 			$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
-			$this->FE->PluginMng->loadPlugins($this->class_name);
+		}
+		if($tag=='') {
+			$this->FE->PluginMng->loadPlugins($this->class_name, false);
+		} else {
+			$this->FE->PluginMng->loadPlugins($tag, false);
 		}
 	}
 	

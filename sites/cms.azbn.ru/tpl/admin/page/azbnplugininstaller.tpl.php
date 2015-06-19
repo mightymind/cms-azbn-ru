@@ -5,7 +5,7 @@ $text = $this->FE->_get('text');
 if($text != '') {
 	$json_str = file_get_contents('http://azbn.ru/cmspluginstore/search/?text='.urlencode($text));
 	$json = json_decode($json_str, true);
-	$title = 'Поиск <i>'.$text.'</i> в хранилище плагинов';
+	$title = 'Поиск <u>'.$text.'</u> в <a href="/admin/page/azbnplugininstaller/" >хранилище плагинов Azbn.ru</a>';
 } else {
 	$json_str = file_get_contents('http://azbn.ru/cmspluginstore/top/');
 	$json = json_decode($json_str, true);

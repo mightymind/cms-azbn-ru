@@ -324,7 +324,7 @@ public $class_name='adminviewer';
 						<ul class="dropdown-menu" role="menu">
 							
 							<?
-							$this->FE->PluginMng->event('viewer_menu_plugin_list', $param);
+							$this->FE->PluginMng->event('admin:viewer:menu_plugin_list', $param);
 							?>
 							
 						</ul>
@@ -619,7 +619,7 @@ public $class_name='adminviewer';
 			//$param['mdl']['hot_updates']='admin/hot_updates';
 			//$this->FE->Viewer->module_live('hot_updates',$param);
 			//
-			$this->FE->PluginMng->event('viewer_leftcol_widget', $param);
+			$this->FE->PluginMng->event('admin:viewer:leftcol_widget', $param);
 			?>
 			
 		</div>

@@ -10,11 +10,15 @@ public $class_name='login';
 		//$_SESSION['tmp']['back_url']=$_SERVER['REQUEST_URI'];
 		}
 	
-	public function loadPluginMng()
+	public function loadPluginMng($tag='')
 	{
 		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
 			$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
-			$this->FE->PluginMng->loadPlugins($this->class_name);
+		}
+		if($tag=='') {
+			$this->FE->PluginMng->loadPlugins($this->class_name, false);
+		} else {
+			$this->FE->PluginMng->loadPlugins($tag, false);
 		}
 	}
 		
@@ -57,10 +61,11 @@ public $class_name='login';
 				}
 			
 			$this->loadPluginMng();
-			$this->FE->PluginMng->event('login_start_after', $param);
+			$this->FE->PluginMng->event('login:start:after_ok', $param);
 			
 			$this->FE->go2('/admin/');
 			} else {
+				$this->FE->PluginMng->event('login:start:after_notok', $param);
 				$_SESSION['tmp']['error']='Вы не смогли войти под логином '.$login.'. Проверьте введенные данные.';
 				$this->FE->go2('/login/index/');
 				}
@@ -68,6 +73,7 @@ public $class_name='login';
 	
 	public function off(&$param)
 	{
+		$this->FE->PluginMng->event('login:off:before_unset', $param);
 		$_SESSION=array();
 		unset($_SESSION);
 		$this->FE->go2('/');

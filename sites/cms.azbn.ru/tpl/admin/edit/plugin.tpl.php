@@ -25,6 +25,10 @@ $(document).ready(function(){
 			</div>
 			
 			<?
+			$this->FE->Viewer->form('admin/rating_input_html',$param);
+			?>
+			
+			<?
 			if(count($param['edit_el']['param'])) {
 				foreach($param['edit_el']['param'] as $name=>$value) {
 			?>

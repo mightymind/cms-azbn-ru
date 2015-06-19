@@ -12,14 +12,14 @@
 
 $prefix='cms';
 $CONFIG=array(
-	'debug'=>0,
+	'debug'=>1,
 	'site'=>'cms.azbn.ru',
 	'base_url'=>'http://cms.azbn.ru/',
 	'charset'=>'UTF-8',
 	
 	'upload_path'=>'upload',
 	'cache_path'=>'cache',
-	'sys_path'=>'/var/www/fe/3.3/include',
+	'sys_path'=>'/var/www/fe/4.0/include',
 	'app_path'=>'apps',
 	'phpmorphy_path'=>'/var/www/phpmorphy/0.3.7/',
 	'backup_path'=>'backup',

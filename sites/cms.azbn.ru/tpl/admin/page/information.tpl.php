@@ -38,7 +38,25 @@
 				<h3 class="panel-title" >Написание плагинов и расширений, их установка</h3>
 			</div>
 			<div class="panel-body" >
-				Panel content
+				
+				<hr />
+				<h4>События запуска плагинов CMS</h4>
+				
+				<ul>
+					
+					<li>cms:session_start</li>
+					<li>cms:unload</li>
+					
+					<li>admin:stop:before_unset</li>
+					<li>admin:viewer:menu_plugin_list</li>
+					<li>admin:viewer:leftcol_widget</li>
+					
+					<li>login:start:after_ok</li>
+					<li>login:start:after_notok</li>
+					<li>login:off:before_unset</li>
+					
+				</ul>
+				
 			</div>
 		</div>
 		

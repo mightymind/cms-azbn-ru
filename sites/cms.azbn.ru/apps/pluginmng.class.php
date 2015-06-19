@@ -4,7 +4,7 @@ class Pluginmng {
 
 public $plugins=array();
 public $events=array();
-public $results=array();
+//public $results=array();
 //public $PluginMng = null;
 
 	function __construct()
@@ -17,10 +17,10 @@ public $results=array();
 		if($clear) {
 			$this->plugins=array();
 			$this->events=array();
-			$this->results=array();
+			//$this->results=array();
 		}
 		if($tag!='') {
-			$tag_sql="AND tag='$tag'";
+			$tag_sql="AND (tag LIKE '$tag%')";
 		} else {
 			$tag_sql='';
 		}
@@ -85,15 +85,20 @@ public $results=array();
 	
 	public function event($event, &$param)
 	{
-		if(count($this->events[$event])) {
-			foreach($this->events[$event] as &$plugin) {
-				if(isset($plugin)) {
-					if(method_exists($plugin, 'onEvent')) {
-						$this->results[$event][$plugin->config['id']] = $plugin->onEvent($event, $param);
+		if(isset($this->events[$event])) {
+			if(count($this->events[$event])) {
+				foreach($this->events[$event] as &$plugin) {
+					if(isset($plugin)) {
+						if(method_exists($plugin, 'onEvent')) {
+							//$this->results[$event][$plugin->config['id']] = 
+							$plugin->onEvent($event, $param);
+						}
 					}
 				}
+				return true;
+			} else {
+				return false;
 			}
-			return true;
 		} else {
 			return false;
 		}
@@ -118,7 +123,7 @@ public $results=array();
 	{
 		unset($this->plugins);
 		unset($this->events);
-		unset($this->results);
+		//unset($this->results);
 		unset($this);
 	}
 
