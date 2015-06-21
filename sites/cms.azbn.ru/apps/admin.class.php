@@ -35,10 +35,10 @@ public $class_name='admin';
 		
 		$tpl=$this->FE->c_s($param['req_arr']['param_1']);
 		
-		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Adminviewer','var'=>'Viewer'));
-		$this->FE->Viewer->startofpage($param);
+		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
+		$this->FE->Viewer->startofpage($param, 'admin/startofpage');
 		$this->FE->Viewer->form('admin/page/'.$tpl,$param);
-		$this->FE->Viewer->endofpage($param);
+		$this->FE->Viewer->endofpage($param, 'admin/endofpage');
 	}
 	
 	public function edit_file(&$param)
@@ -49,7 +49,7 @@ public $class_name='admin';
 			'name'=>$this->FE->_get('file'),
 			'main_info'=>file_get_contents($this->FE->_get('file')),
 			);
-		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Adminviewer','var'=>'Viewer'));
+		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->form('admin/page/edit_file',$param);
 	}
 	
@@ -173,11 +173,11 @@ public $class_name='admin';
 		$param['fe_mdl']['edit']='admin/edit/'.$type;
 		$this->FE->mdl('edit',$param);
 		
-		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Adminviewer','var'=>'Viewer'));
+		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$param['page_title']='Редактирование записи - '.$this->fe_config['enginetitle'];
-		$this->FE->Viewer->startofpage($param);
+		$this->FE->Viewer->startofpage($param, 'admin/startofpage');
 		$this->FE->Viewer->form($param['html_tpl'],$param);
-		$this->FE->Viewer->endofpage($param);
+		$this->FE->Viewer->endofpage($param, 'admin/endofpage');
 	}
 	
 	public function backup(&$param)
@@ -193,11 +193,11 @@ public $class_name='admin';
 		$param['fe_mdl']['backup']='admin/backup/'.$type;
 		$this->FE->mdl('backup',$param);
 		
-		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Adminviewer','var'=>'Viewer'));
+		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$param['page_title']='Редактирование восстановленной записи - '.$this->fe_config['enginetitle'];
-		$this->FE->Viewer->startofpage($param);
+		$this->FE->Viewer->startofpage($param, 'admin/startofpage');
 		$this->FE->Viewer->form($param['html_tpl'],$param);
-		$this->FE->Viewer->endofpage($param);
+		$this->FE->Viewer->endofpage($param, 'admin/endofpage');
 		//$param['edit_el']=unserialize(file_get_contents($this->FE->config['backup_path'].'/'.$this->FE->config['site'].'/'.$param['backup_el']['el_type'].'/'.$param['backup_el']['created_at'].'_'.$param['backup_el']['el_id'].'_'.$param['backup_el']['user']));
 		//$param['html_tpl']='admin/edit/'.$param['backup_el']['el_type'];
 	}
@@ -217,11 +217,11 @@ public $class_name='admin';
 		$param['fe_mdl']['add']='admin/add/'.$type;
 		$this->FE->mdl('add',$param);
 		
-		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Adminviewer','var'=>'Viewer'));
+		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$param['page_title']='Создание записи - '.$this->fe_config['enginetitle'];
-		$this->FE->Viewer->startofpage($param);
+		$this->FE->Viewer->startofpage($param, 'admin/startofpage');
 		$this->FE->Viewer->form($param['html_tpl'],$param);
-		$this->FE->Viewer->endofpage($param);
+		$this->FE->Viewer->endofpage($param, 'admin/endofpage');
 	}
 /* ---------- Форма создания объектов в БД ---------- */
 
@@ -237,11 +237,11 @@ public $class_name='admin';
 		$param['fe_mdl']['all']='admin/all/'.$type;
 		$this->FE->mdl('all',$param);
 		
-		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Adminviewer','var'=>'Viewer'));
+		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$param['page_title']='Все записи - '.$this->fe_config['enginetitle'];
-		$this->FE->Viewer->startofpage($param);
+		$this->FE->Viewer->startofpage($param, 'admin/startofpage');
 		$this->FE->Viewer->form($param['html_tpl'],$param);
-		$this->FE->Viewer->endofpage($param);
+		$this->FE->Viewer->endofpage($param, 'admin/endofpage');
 	}
 	/* ---------- Все объекты в БД ---------- */
 
