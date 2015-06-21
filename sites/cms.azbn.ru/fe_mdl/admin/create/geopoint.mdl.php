@@ -41,7 +41,7 @@ $param['new_el']=array(
 	'param'=>serialize($_param)
 	);
 
-$param['new_el_id']=$this->DB->dbInsertIgnore($this->DB->dbtables['t_'.$type],$param['new_el']);
+$param['new_el_id']=$this->FE->DB->dbInsertIgnore($this->FE->DB->dbtables['t_'.$type],$param['new_el']);
 
 $log_id=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_log'],array(
 	'created_at'=>$this->FE->date,

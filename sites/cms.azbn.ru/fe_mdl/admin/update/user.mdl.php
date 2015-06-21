@@ -38,7 +38,7 @@ if(mb_strlen($_POST['pass'])) {
 	$param['new_el']['pass']=$this->FE->hash($this->FE->_post('pass'),$this->FE->_post('login'),$this->FE->version['secret']);//$this->FE->hash($this->FE->_post('pass'));
 	}
 
-$this->DB->dbUpdateArr($this->DB->dbtables['t_'.$type],$param['new_el'],"WHERE id='{$param['new_el_id']}'");
+$this->FE->DB->dbUpdateArr($this->FE->DB->dbtables['t_'.$type],$param['new_el'],"WHERE id='{$param['new_el_id']}'");
 
 $log_id=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_log'],array(
 	'created_at'=>$this->FE->date,

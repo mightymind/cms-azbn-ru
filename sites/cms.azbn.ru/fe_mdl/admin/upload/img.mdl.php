@@ -97,11 +97,13 @@
 			}
 		$this->FE->unload('Img');
 		
-		$upl_id=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_uplimg'],array(
+		$param['new_el'] = array(
 			'created_at'=>$this->FE->date,
 			'user'=>$_SESSION['user']['id'],
 			'url'=>'/'.$img_file,
-			));
+			);
+		
+		$param['new_el_id']=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_uplimg'], $param['new_el']);
 		
 		echo '/'.$img_file;
 		//$this->FE->go2('/'.$file);

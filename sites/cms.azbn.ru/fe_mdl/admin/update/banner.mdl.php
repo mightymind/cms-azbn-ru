@@ -8,7 +8,7 @@ $param['new_el']=array(
 	'title'=>$this->FE->_post('title'),
 	);
 
-$this->DB->dbUpdateArr($this->DB->dbtables['t_banner'],$param['new_el'],"WHERE id='{$param['new_el_id']}'");
+$this->FE->DB->dbUpdateArr($this->FE->DB->dbtables['t_banner'],$param['new_el'],"WHERE id='{$param['new_el_id']}'");
 
 $log_id=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_log'],array(
 	'created_at'=>$this->FE->date,

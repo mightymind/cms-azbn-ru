@@ -22,7 +22,7 @@ if($_SESSION['user']['right']['change_gallery_superuser'] && isset($_POST['user'
 	$param['new_el']['user']=$this->FE->as_int($_POST['user']);
 	}
 
-$this->DB->dbUpdateArr($this->DB->dbtables['t_'.$type],$param['new_el'],"WHERE id='{$param['new_el_id']}'");
+$this->FE->DB->dbUpdateArr($this->FE->DB->dbtables['t_'.$type],$param['new_el'],"WHERE id='{$param['new_el_id']}'");
 
 $log_id=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_log'],array(
 	'created_at'=>$this->FE->date,

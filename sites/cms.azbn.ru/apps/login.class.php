@@ -34,6 +34,8 @@ public $class_name='login';
 	
 	public function start($param)
 	{
+		$this->loadPluginMng();
+		
 		$login=$this->FE->_post('login');
 		$pass=$this->FE->hash($this->FE->_post('pass'),$login,$this->FE->version['secret']);
 		$user_id=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `".$this->FE->DB->dbtables['t_user']."` WHERE status=1 AND login='$login' AND pass='$pass'");
@@ -60,19 +62,23 @@ public $class_name='login';
 					}
 				}
 			
-			$this->loadPluginMng();
 			$this->FE->PluginMng->event('login:start:after_ok', $param);
 			
 			$this->FE->go2('/admin/');
+			
 			} else {
+				
 				$this->FE->PluginMng->event('login:start:after_notok', $param);
 				$_SESSION['tmp']['error']='Вы не смогли войти под логином '.$login.'. Проверьте введенные данные.';
 				$this->FE->go2('/login/index/');
+				
 				}
 		}
 	
 	public function off(&$param)
 	{
+		$this->loadPluginMng();
+		
 		$this->FE->PluginMng->event('login:off:before_unset', $param);
 		$_SESSION=array();
 		unset($_SESSION);

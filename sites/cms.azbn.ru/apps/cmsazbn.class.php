@@ -71,30 +71,6 @@ public $debug;
 	Работа с URL
 	*/
 	
-	/*
-	public function getAlias($req)
-	{
-		$alias=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `".$this->FE->DB->dbtables['t_alias']."` WHERE req='$req'");
-		if($alias['id']) {
-			
-			} else {
-				$alias['to']=$req;
-				}
-		return $alias;
-		}
-	
-	public function genAlias($to)
-	{
-		$alias=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `".$this->FE->DB->dbtables['t_alias']."` WHERE `to`='$to'");
-		if($alias['id']) {
-			$str=$alias['req'];
-			} else {
-				$str=$to;
-				}
-		return $str;
-		}
-	*/
-	
 	public function getAlias($req)
 	{
 		if(isset($this->FE->config['alias']['list'][$req])) {
@@ -274,6 +250,9 @@ public $debug;
 	{
 		$this->FE->load(array('path'=>$this->FE->config['sys_path'],'class'=>'InterfaceDB','var'=>$name),false);
 		$this->FE->$name->_init($config);
+		
+		$this->FE->PluginMng->event('cms:connect2otherdb', $param);
+		
 		return true;
 	}
 	

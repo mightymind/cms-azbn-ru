@@ -102,7 +102,7 @@ public $resp=array(
 			} else {
 				echo ($this->FE->arr2json($this->resp));
 				}
-		
+		die();
 		}
 	
 	public function admin(&$param)
@@ -142,7 +142,7 @@ public $resp=array(
 				}
 		
 		echo ($this->FE->arr2json($this->resp));
-		
+		die();
 		}
 	
 }

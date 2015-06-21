@@ -35,7 +35,7 @@ public $class_name='install';
 		@copy('upload/cms.azbn.ru','upload/'.$this->FE->config['site']);
 		*/
 		
-		$this->loadPluginMng();
+		$this->loadPluginMng('install');
 		
 		echo '<hr />';
 		
@@ -97,11 +97,15 @@ public $class_name='install';
 		
 		echo 'Tables is droped.<br />';
 		
+		$this->FE->PluginMng->event('install:clear:after', $param);
+		
 		$this->FE->go2('/install/main/');
 		}
 	
 	public function main(&$param)
 	{
+		
+		$this->loadPluginMng('install');
 		
 		echo '<hr />';
 		
@@ -310,18 +314,6 @@ public $class_name='install';
 			} else {
 				echo 'Table <b>'.$table_name.'</b> <b>is not</b> installed<br />';
 				}
-		/*
-		//$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_entity'],array('title'=>'','url'=>''));
-		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_entity'],array('title'=>'Страницы','url'=>'page'));
-		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_entity'],array('title'=>'Посты','url'=>'post'));
-		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_entity'],array('title'=>'Новости','url'=>'news'));
-		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_entity'],array('title'=>'Геометки','url'=>'geopoint'));
-		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_entity'],array('title'=>'Товары','url'=>'product'));
-		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_entity'],array('title'=>'Галереи','url'=>'gallery'));
-		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_entity'],array('title'=>'Календарь','url'=>'calendar'));
-		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_entity'],array('title'=>'Баннеры','url'=>'banner'));
-		$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_entity'],array('title'=>'Загруженные файлы','url'=>'uplfile'));
-		*/
 		
 		
 		$table_name=$this->FE->DB->dbtables['t_userright'];
@@ -605,12 +597,16 @@ public $class_name='install';
 				echo 'Table <b>'.$table_name.'</b> <b>is not</b> installed<br />';
 				}
 		
+		$this->FE->PluginMng->event('install:main:after', $param);
+		
 		$this->FE->go2('/install/site/');
 		
-		}
+	}
 	
 	public function site(&$param)
 	{
+		
+		$this->loadPluginMng('install');
 		
 		echo '<hr />';
 		
@@ -1119,9 +1115,11 @@ public $class_name='install';
 				echo 'Table <b>'.$table_name.'</b> <b>is not</b> installed<br />';
 				}
 		
+		$this->FE->PluginMng->event('install:site:after', $param);
+		
 		$this->FE->go2('/login/');
 		
-		}
+	}
 	
 	function getFullTextInstallStr($type='')
 	{

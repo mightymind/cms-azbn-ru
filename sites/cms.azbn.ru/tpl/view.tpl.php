@@ -1,5 +1,6 @@
 <?
-// Жажда версии 2.7 на движке ForEach 2.7
+// CMS Azbn.ru Публичная версия
+
 var_dump($param['item_id']);
 /*
 <div class="view-page" >

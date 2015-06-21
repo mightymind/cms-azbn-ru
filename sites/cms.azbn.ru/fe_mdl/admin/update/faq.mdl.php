@@ -17,7 +17,7 @@ if($_SESSION['user']['right']['change_faq_superuser'] && isset($_POST['profile']
 	$param['new_el']['profile']=$this->FE->as_int($_POST['profile']);
 	}
 
-$this->DB->dbUpdateArr($this->DB->dbtables['t_'.$type],$param['new_el'],"WHERE id='{$param['new_el_id']}'");
+$this->FE->DB->dbUpdateArr($this->FE->DB->dbtables['t_'.$type],$param['new_el'],"WHERE id='{$param['new_el_id']}'");
 
 $log_id=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_log'],array(
 	'created_at'=>$this->FE->date,

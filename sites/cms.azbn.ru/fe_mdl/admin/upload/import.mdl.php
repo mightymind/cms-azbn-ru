@@ -15,11 +15,13 @@ $subpath=isset($_GET['path'])?('/'.$this->FE->_get('path').'/'):('/');
 		
 		$img_file='upload/'.$this->FE->config['site'].$subpath.$img_arr['new_file'].$img_arr['suff'];
 		
-		$upl_id=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_uplfile'],array(
+		$param['new_el'] = array(
 			'created_at'=>$this->FE->date,
 			'user'=>$_SESSION['user']['id'],
 			'url'=>'/'.$img_file,
-			));
+			);
+		
+		$param['new_el_id']=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_uplfile'], $param['new_el']);
 		
 		$funcNum=$this->FE->_get('CKEditorFuncNum');
 		//$CKEditor=$_GET['CKEditor'];

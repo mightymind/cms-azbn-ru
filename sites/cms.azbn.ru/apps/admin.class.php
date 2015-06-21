@@ -70,6 +70,8 @@ public $class_name='admin';
 		$type=$this->FE->c_s($param['req_arr']['param_1']);
 		$param['fe_mdl']['upload']='admin/upload/'.$type;
 		$this->FE->mdl('upload',$param);
+		
+		$this->FE->PluginMng->event('admin:upload:after', $param);
 	}
 	
 	public function create(&$param)
@@ -88,6 +90,8 @@ public $class_name='admin';
 		if($_id) {
 			$entity_id_str="$_id/";
 		}
+		
+		$this->FE->PluginMng->event('admin:create:after', $param);
 		
 		$this->FE->go2('/admin/all/'.$type.'/'.$entity_id_str);
 	}
@@ -115,6 +119,8 @@ public $class_name='admin';
 		if($_id) {
 			$entity_id_str="$id/";
 		}
+		
+		$this->FE->PluginMng->event('admin:update:after', $param);
 		
 		$this->FE->go2('/admin/all/'.$type.'/'.$entity_id_str);
 	}
@@ -150,6 +156,8 @@ public $class_name='admin';
 		if($_id) {
 			$entity_id_str="$id/";
 		}
+		
+		$this->FE->PluginMng->event('admin:delete:after', $param);
 		
 		if($type=='galleryitem') {
 			$this->FE->go2('/admin/edit/gallery/'.$gal.'/#table-of-galleryitem-header');

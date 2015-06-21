@@ -26,7 +26,7 @@ $FE->PluginMng->loadPlugins('cms', true);
 session_start();
 $FE->CMS->setTimeZone();
 
-$FE->FE->PluginMng->event('cms:session_start', $param);
+$FE->PluginMng->event('cms:session_start', $param);
 
 // запуск нужного класса по данным пользовательского запроса
 $req_arr=$FE->CMS->getReqParams();
@@ -38,7 +38,7 @@ $FE->run_app(array(
 		'req_arr'=>$req_arr['req_arr'],
 		)));
 
-$FE->FE->PluginMng->event('cms:unload', $req_arr);
+$FE->PluginMng->event('cms:unload', $req_arr);
 /*
 // выгрузка запущенных классов
 $FE->unload('CMS');

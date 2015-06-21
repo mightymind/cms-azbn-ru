@@ -15,21 +15,23 @@ $subpath=isset($_GET['path'])?('/'.$this->FE->_get('path').'/'):('/');
 		
 		$img_file='upload/'.$this->FE->config['site'].$subpath.$img_arr['new_file'].$img_arr['suff'];
 		
-		$upl_id=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_uplfile'],array(
+		$param['new_el'] = array(
 			'created_at'=>$this->FE->date,
 			'user'=>$_SESSION['user']['id'],
 			'size'=>$_FILES['uploading_file']['size'],
 			'title'=>basename($_FILES['uploading_file']['name']),
 			'url'=>'/'.$img_file,
-			));
+			);
+		
+		$param['new_el_id']=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_uplfile'],$param['new_el']);
 		
 		//echo '/'.$img_file;
-		//echo '/uplfile/item/'.$upl_id.'/';
+		//echo '/uplfile/item/'.$param['new_el_id'].'/';
 		//$this->FE->go2('/'.$file);
 		
 		if($this->FE->as_int($_GET['realurl'])) {
 			echo '/'.$img_file;
 		} else {
-			echo '/uplfile/item/'.$upl_id.'/';
+			echo '/uplfile/item/'.$param['new_el_id'].'/';
 		}
 ?>

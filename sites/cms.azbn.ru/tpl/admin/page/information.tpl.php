@@ -46,14 +46,44 @@
 					
 					<li>cms:session_start</li>
 					<li>cms:unload</li>
+					<li>cms:connect2otherdb</li>
+					
+				</ul>
+				
+				<ul>
+					
+					<li>install:clear:after</li>
+					<li>install:main:after</li>
+					<li>install:site:after</li>
+					
+				</ul>
+				
+				<ul>
 					
 					<li>admin:stop:before_unset</li>
+					<li>admin:upload:after</li>
+					<li>admin:create:after</li>
+					<li>admin:update:after</li>
+					<li>admin:delete:after</li>
 					<li>admin:viewer:menu_plugin_list</li>
 					<li>admin:viewer:leftcol_widget</li>
+					
+				</ul>
+				
+				<ul>
 					
 					<li>login:start:after_ok</li>
 					<li>login:start:after_notok</li>
 					<li>login:off:before_unset</li>
+					
+				</ul>
+				
+				<ul>
+					
+					<li>profile:start:after_ok</li>
+					<li>profile:start:after_notok</li>
+					<li>profile:create:after_ok</li>
+					<li>profile:off:before_unset</li>
 					
 				</ul>
 				

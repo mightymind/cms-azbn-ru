@@ -90,7 +90,12 @@ public $events=array();
 				foreach($this->events[$event] as &$plugin) {
 					if(isset($plugin)) {
 						if(method_exists($plugin, 'onEvent')) {
-							//$this->results[$event][$plugin->config['id']] = 
+							$this->FE->error[] = array(
+								'created_at'=>$this->FE->getMicroTime(),
+								'id'=>0,
+								'title'=>'Event: '.$event,
+								'file'=>'Plugin: '.get_class($plugin),
+								);
 							$plugin->onEvent($event, $param);
 						}
 					}

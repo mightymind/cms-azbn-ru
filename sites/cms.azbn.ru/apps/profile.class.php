@@ -10,6 +10,18 @@ public $class_name='profile';
 
 		}
 	
+	public function loadPluginMng($tag='')
+	{
+		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
+			$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
+		}
+		if($tag=='') {
+			$this->FE->PluginMng->loadPlugins($this->class_name, false);
+		} else {
+			$this->FE->PluginMng->loadPlugins($tag, false);
+		}
+	}
+	
 	public function item(&$param)
 	{
 		if($this->FE->is_num($param['req_arr']['param_1'])) {
@@ -55,6 +67,8 @@ public $class_name='profile';
 	
 	public function start($param)
 	{
+		$this->loadPluginMng();
+		
 		$login=$this->FE->_post('login');
 		$pass=$this->FE->hash($this->FE->_post('pass'),$login,'profile');
 		$user_id=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `".$this->FE->DB->dbtables['t_profile']."` WHERE status=1 AND login='$login' AND pass='$pass'");
@@ -81,15 +95,22 @@ public $class_name='profile';
 					}
 				}
 			
+			$this->FE->PluginMng->event('profile:start:after_ok', $param);
+			
 			$this->FE->go2('/profile/item/'.$_SESSION['profile']['id']);
+			
 			} else {
+				
+				$this->FE->PluginMng->event('profile:start:after_notok', $param);
 				$_SESSION['tmp']['error']='Вы не смогли войти под логином '.$login.'. Проверьте введенные данные.';
 				$this->FE->go2('/profile/');
+				
 				}
 		}
 	
 	public function create(&$param)
 	{
+		$this->loadPluginMng();
 		
 		$param['new_el']=array(
 			'login'=>$this->FE->_post('login'),
@@ -118,13 +139,19 @@ public $class_name='profile';
 		$profile_id=$this->FE->DB->dbInsertIgnore($this->FE->DB->dbtables['t_profile'],$param['new_el']);
 		
 		if($profile_id) {
+			
+			$this->FE->PluginMng->event('profile:create:after_ok', $param);
 			$this->FE->go2('/profile/view/'.$profile_id);
+			
 			}
 		
 		}
 	
 	public function off(&$param)
 	{
+		$this->loadPluginMng();
+		$this->FE->PluginMng->event('profile:off:before_unset', $param);
+		
 		$_SESSION=array();
 		unset($_SESSION);
 		$this->FE->go2('/');

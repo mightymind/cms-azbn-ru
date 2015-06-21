@@ -1,5 +1,5 @@
 <?
-// Жажда версии 2.9 на движке ForEach 2.9
+// CMS Azbn.ru Публичная версия
 
 while($row=mysql_fetch_array($param['item_list'])) {
 	//$this->FE->Viewer->view_card($row,$param['req_arr']['cont']);
