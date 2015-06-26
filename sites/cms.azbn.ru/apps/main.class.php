@@ -8,7 +8,7 @@ public $class_name='main';
 	function __construct()
 	{
 		
-		}
+	}
 	
 	public function index(&$param)
 	{
@@ -24,7 +24,7 @@ public $class_name='main';
 		*/
 		$this->FE->Viewer->endofpage($param);
 		
-		}
+	}
 	
 	public function pageByTpl(&$param)
 	{
@@ -33,7 +33,7 @@ public $class_name='main';
 		
 		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->form('main/pageByTpl/'.$path.'/'.$tpl,$param);
-		}
+	}
 	
 	public function sitemap(&$param)
 	{
@@ -74,7 +74,7 @@ public $class_name='main';
 		
 		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->form($tpl,$param);
-		}
+	}
 	
 	public function lazy(&$param)
 	{
@@ -85,7 +85,7 @@ public $class_name='main';
 		
 		echo 'final<br />';
 		
-		}
+	}
 	
 	public function phpm(&$param)
 	{
@@ -134,7 +134,7 @@ public $class_name='main';
 		
 		echo '</pre>';
 		
-		}
+	}
 	
 	public function trans(&$param)
 	{

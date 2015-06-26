@@ -8,18 +8,6 @@ public $class_name='install';
 	function __construct()
 	{
 		
-		}
-	
-	public function loadPluginMng($tag='')
-	{
-		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
-			$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
-		}
-		if($tag=='') {
-			$this->FE->PluginMng->loadPlugins($this->class_name, false);
-		} else {
-			$this->FE->PluginMng->loadPlugins($tag, false);
-		}
 	}
 	
 	public function clear(&$param)
@@ -35,7 +23,7 @@ public $class_name='install';
 		@copy('upload/cms.azbn.ru','upload/'.$this->FE->config['site']);
 		*/
 		
-		$this->loadPluginMng('install');
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		echo '<hr />';
 		
@@ -105,7 +93,7 @@ public $class_name='install';
 	public function main(&$param)
 	{
 		
-		$this->loadPluginMng('install');
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		echo '<hr />';
 		
@@ -606,7 +594,7 @@ public $class_name='install';
 	public function site(&$param)
 	{
 		
-		$this->loadPluginMng('install');
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		echo '<hr />';
 		

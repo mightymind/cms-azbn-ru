@@ -32,6 +32,10 @@ $(document).ready(function(){
 				<input class="form-control" type="text" name="kw" value="keywords, of, page, ключевые, слова" />
 			</div>
 			
+			<?
+			$this->FE->PluginMng->event('admin:viewer:before_create_btn', $param);
+			?>
+			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success" >Добавить</button>
 			</div>

@@ -80,6 +80,10 @@ $(document).ready(function(){
 			}
 			?>
 			
+			<?
+			$this->FE->PluginMng->event('admin:viewer:before_create_btn', $param);
+			?>
+			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success" >Создать категорию</button>
 			</div>

@@ -17,6 +17,8 @@ public $class_name='search';
 	
 	public function fulltext(&$param)
 	{
+		$this->FE->CMS->loadPluginMng($this->class_name);
+		
 		$param['ftsearch']['text']=mb_strtolower($this->FE->_get('text'), $this->FE->config['charset']);
 		//$param['item_id']['title']=$param['item_id']['text'];
 		
@@ -87,6 +89,34 @@ public $class_name='search';
 					}
 					break;
 					
+					case 'postcat': {
+						$table=$this->FE->DB->dbtables['t_'.$row['el_type']];
+						$url_tpl='/post/cat/{%url%}/';
+						$type=$row['el_type'];
+					}
+					break;
+					
+					case 'newscat': {
+						$table=$this->FE->DB->dbtables['t_'.$row['el_type']];
+						$url_tpl='/news/cat/{%url%}/';
+						$type=$row['el_type'];
+					}
+					break;
+					
+					case 'productcat': {
+						$table=$this->FE->DB->dbtables['t_'.$row['el_type']];
+						$url_tpl='/product/cat/{%url%}/';
+						$type=$row['el_type'];
+					}
+					break;
+					
+					case 'geopointcat': {
+						$table=$this->FE->DB->dbtables['t_'.$row['el_type']];
+						$url_tpl='/geopoint/cat/{%url%}/';
+						$type=$row['el_type'];
+					}
+					break;
+					
 					default:{
 						$table=$this->FE->DB->dbtables['t_'.$row['el_type']];
 						$url_tpl='/'.$row['el_type'].'/item/{%url%}/';
@@ -120,6 +150,8 @@ public $class_name='search';
 			}
 			mysql_data_seek($param['ftsearch_list'],0);
 		}
+		
+		$this->FE->PluginMng->event('search:fulltext:after', $param);
 		
 		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->startofpage($param);

@@ -22,8 +22,11 @@ public $class_name='uplfile';
 		if (!file_exists('.'.$param['item_id']['url'])) {
 			Header('HTTP/1.0 404 Not Found');
 			exit;
-			} elseif($param['item_id']['id']) {
+		} elseif($param['item_id']['id']) {
 				set_time_limit(0);
+				
+				$this->FE->PluginMng->event('cms:item_id:after_select', $param);
+				
 				$this->FE->DB->dbUpdate($this->FE->DB->dbtables['t_'.$param['req_arr']['cont']],'clicked=clicked+1',"WHERE id='{$id}'");
 				Header('Cache-Control: private');
 				Header('Content-Type: application/octet-stream');
@@ -32,8 +35,8 @@ public $class_name='uplfile';
 				Header('Content-Transfer-Encoding: binary');
 				//Header('Accept-Ranges: bytes');
 				readfile('.'.$param['item_id']['url']);
-				}
 		}
+	}
 	
 }
 

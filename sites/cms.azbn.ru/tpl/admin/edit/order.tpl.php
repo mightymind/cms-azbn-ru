@@ -57,6 +57,11 @@ if(mysql_num_rows($param['edit_el']['item_list'])) {
 	}
 ?>
 			
+			<?
+			$this->FE->PluginMng->event('admin:viewer:before_update_btn', $param);
+			?>
+			
+			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success" >Обновить</button>
 			</div>

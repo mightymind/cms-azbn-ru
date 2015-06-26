@@ -19,7 +19,9 @@ public $FE = null;
 		switch($event) {
 			
 			case 'admin:viewer:menu_plugin_list':{
-				echo '<li><a href="/admin/page/azbnplugininstaller/" >AzbnPluginInstaller</a></li>';
+				if($_SESSION['user']['right']['access_plugin']) {
+					echo '<li><a href="/admin/page/azbnplugininstaller/" >'.$this->config['title'].'</a></li>';
+				}
 			}
 			break;
 			

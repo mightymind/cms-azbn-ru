@@ -115,6 +115,10 @@ unset($_rights);
 					}
 				?>
 				
+				<?
+				$this->FE->PluginMng->event('admin:viewer:before_create_btn', $param);
+				?>
+				
 				<div class="form-group">
 					<input type="submit" class="btn btn-primary" value="Сохранить" />
 				</div>

@@ -8,12 +8,12 @@ public $class_name='error';
 	function __construct()
 	{
 		
-		}
+	}
 		
 	public function index(&$param)
 	{
 		$this->FE->go2('/');
-		}
+	}
 	
 	public function by_url(&$param)
 	{
@@ -23,7 +23,7 @@ public $class_name='error';
 		$this->FE->Viewer->startofpage($param);
 		$this->FE->Viewer->form('error/by_url',$param);
 		$this->FE->Viewer->endofpage($param);
-		}
+	}
 	
 }
 

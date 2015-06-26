@@ -19,11 +19,12 @@ $(document).ready(function() {
 		$('#fe-uplimg-input-<?=$uniq;?>').val(img);
 		$('#fe-uplimg-img-<?=$uniq;?>').attr({'src':img});
 	}
-	
+	/*
 	function setPreviewImgValue_<?=$uniq;?>(img) {
 		$('#fe-uplpreview-input-<?=$uniq;?>').val(img);
 		$('#fe-uplpreview-img-<?=$uniq;?>').attr({'src':(img)});
 	}
+	*/
 	
 	$('#fe-uplimg-import-a-<?=$uniq;?>').on('click',function(){
 		var link=prompt('Введите адрес изображения в интернете',$('#fe-uplimg-input-<?=$uniq;?>').val());
@@ -97,12 +98,12 @@ $(document).ready(function() {
 				
 				},
 			callback_preview:function(dataURL_){
-				
+				/*
 				$.post('/admin/upload/dataurl/',{'path':'<?=$param['img_form']['path'];?>','img_to_save':dataURL_},function(data){
 					setPreviewImgValue_<?=$uniq;?>(data);
 					$('#create-img-for-el-modal-cansel-<?=$uniq;?>').trigger('click');
 					});
-				
+				*/
 				}
 			});
 		
@@ -350,14 +351,14 @@ $(document).ready(function() {
 			<p><a href="#bygalleryitem" class="btn btn-primary btn-block" id="fe-uplimg-galleryitem-a-<?=$uniq;?>" data-toggle="modal" data-target="#select-from-galleryitem-modal-<?=$uniq;?>" >выбрать из галерей</a></p>
 			
 		</div>
-		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 			
 			<small>Изображение</small>
 			<input type="hidden" id="fe-uplimg-input-<?=$uniq;?>" name="<?=$img['name'];?>" value="<?=$img['src'];?>" />
 			<center><img id="fe-uplimg-img-<?=$uniq;?>" src="<?=$img['src'];?>" /></center>
 			
 		</div>
-		
+		<!--
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			
 			<small>Превью</small>
@@ -365,7 +366,7 @@ $(document).ready(function() {
 			<center><img id="fe-uplpreview-img-<?=$uniq;?>" src="<?=$img['preview']['src'];?>" /></center>
 			
 		</div>
-		
+		-->
 	</div>
 	
 </div>

@@ -90,6 +90,10 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/form_editor_html',$param);
 			?>
 			
+			<?
+			$this->FE->PluginMng->event('admin:viewer:before_update_btn', $param);
+			?>
+			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success" >Обновить</button>
 			</div>

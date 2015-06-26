@@ -37,6 +37,7 @@ public $class_name='entity';
 		$param['item_list']=$this->FE->DB->dbSelect("SELECT * FROM `".$table_list."` WHERE cat='{$param['cat_id']['id']}' AND visible='1' ORDER BY rating");
 		
 		//$param['page_html']['seo']=$this->FE->CMS->getSEO($param['cat_id']['seo']);
+		$this->FE->PluginMng->event('cms:cat_id:after_select', $param);
 		
 		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->startofpage($param);
@@ -64,6 +65,7 @@ public $class_name='entity';
 		$param['cat_id']=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `".$table."cat` WHERE (id='{$param['item_id']['cat']}')");
 		
 		//$param['page_html']['seo']=$this->FE->CMS->getSEO($param['item_id']['seo']);
+		$this->FE->PluginMng->event('cms:item_id:after_select', $param);
 		
 		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->startofpage($param);

@@ -16,6 +16,10 @@ $(document).ready(function(){
 		
 		<form action="/admin/update/plugin/<?=$param['edit_el']['id'];?>/" method="POST" >
 			
+			<?
+			$this->FE->Viewer->form('admin/title_input_html',$param);
+			?>
+			
 			<div class="form-group">
 				<label for="status" >Статус</label>
 				<select class="form-control" name="status" >
@@ -52,6 +56,10 @@ $(document).ready(function(){
 			
 			<?
 			}
+			?>
+			
+			<?
+			$this->FE->PluginMng->event('admin:viewer:before_update_btn', $param);
 			?>
 			
 			<div class="form-group">

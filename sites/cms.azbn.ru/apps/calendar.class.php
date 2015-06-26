@@ -41,6 +41,7 @@ public $class_name='calendar';
 		$param['item_id']=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `".$this->FE->DB->dbtables['t_'.$param['req_arr']['cont']]."` WHERE ($uid_str='$uid' AND visible='1')");
 		
 		//$param['page_html']['seo']=$this->FE->CMS->getSEO($param['item_id']['seo']);
+		$this->FE->PluginMng->event('cms:item_id:after_select', $param);
 		
 		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->startofpage($param);

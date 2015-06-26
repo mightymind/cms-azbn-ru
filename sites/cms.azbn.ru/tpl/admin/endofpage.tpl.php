@@ -99,5 +99,9 @@
 	
 </div>
 
+<?
+$this->FE->PluginMng->event('admin:viewer:body:after', $param);
+?>
+
 </body>
 </html>

@@ -123,6 +123,10 @@ $(document).ready(function(){
 				<?
 					}
 				?>
+		
+				<?
+				$this->FE->PluginMng->event('admin:viewer:before_update_btn', $param);
+				?>
 				
 				<div class="form-group">
 					<input type="submit" class="btn btn-primary" value="Сохранить" />

@@ -21,7 +21,7 @@ $FE->load(array('path'=>$FE->config['sys_path'],'class'=>'Cache','var'=>'Cache')
 //$FE->load(array('path'=>$FE->config['sys_path'],'class'=>'LiteDB','var'=>'LDB'));
 $FE->load(array('path'=>$FE->config['app_path'],'class'=>'CMSAzbn','var'=>'CMS'));
 $FE->load(array('path'=>$FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
-$FE->PluginMng->loadPlugins('cms', true);
+$FE->CMS->loadPluginMng('cms', true);
 
 session_start();
 $FE->CMS->setTimeZone();

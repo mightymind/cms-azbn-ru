@@ -41,6 +41,10 @@
 									<input type="text" class="form-control" name="app_key" value="<?=$param['edit_el']['app_key'];?>" />
 								</div>
 								
+								<?
+								$this->FE->PluginMng->event('admin:viewer:before_update_btn', $param);
+								?>
+								
 								<div class="form-group">
 									<input type="submit" class="btn btn-primary" value="Сохранить" />
 								</div>

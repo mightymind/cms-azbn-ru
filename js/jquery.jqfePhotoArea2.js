@@ -287,7 +287,8 @@ jquery-плагин
 				sel_tl.css({left:0,top:0}).css(styles.sel_tl);
 				sel_br.css({left:'',top:''}).css(styles.sel_br);
 				btn_ok.css(styles.visible);
-				btn_preview.css(styles.visible);
+				//btn_preview.css(styles.visible);
+				btn_preview.css(styles.hidden);
 				gray_bg.css({width:el.width(),height:el.height()}).css(styles.visible);
 				
 				var canvas=document.createElement("canvas");

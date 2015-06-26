@@ -22,6 +22,7 @@ public $class_name='feedback';
 		$param['item_list']=$this->FE->DB->dbSelect("SELECT * FROM `".$this->FE->DB->dbtables['t_'.$param['req_arr']['cont']]."` WHERE visible='1' ORDER BY created_at DESC");
 		
 		$param['page_html']['seo']=$this->FE->CMS->getSEO(2);
+		$this->FE->PluginMng->event('cms:all:after_select', $param);
 		
 		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->startofpage($param);
@@ -45,6 +46,9 @@ public $class_name='feedback';
 			$item['id']=$this->FE->DB->dbInsert($this->FE->DB->dbtables['t_'.$param['req_arr']['cont']],$item);
 			
 			if($item['id']) {
+				
+				$this->FE->PluginMng->event('feedback:create:after', $item);
+				
 				$this->FE->go2('/'.$param['req_arr']['cont'].'/created/');
 			} else {
 				$this->FE->go2('/'.$param['req_arr']['cont'].'/not_created/');

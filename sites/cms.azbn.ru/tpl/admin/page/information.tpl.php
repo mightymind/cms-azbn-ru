@@ -47,6 +47,9 @@
 					<li>cms:session_start</li>
 					<li>cms:unload</li>
 					<li>cms:connect2otherdb</li>
+					<li>cms:item_id:after_select</li>
+					<li>cms:cat_id:after_select</li>
+					<li>cms:all:after_select</li>
 					
 				</ul>
 				
@@ -67,6 +70,17 @@
 					<li>admin:delete:after</li>
 					<li>admin:viewer:menu_plugin_list</li>
 					<li>admin:viewer:leftcol_widget</li>
+					<li>admin:viewer:head:after</li>
+					<li>admin:viewer:body:after</li>
+					<li>admin:viewer:before_create_btn</li>
+					<li>admin:viewer:before_update_btn</li>
+					
+				</ul>
+				
+				<ul>
+					
+					<li>api:call:before_echo</li>
+					<li>api:admin:before_echo</li>
 					
 				</ul>
 				
@@ -84,6 +98,31 @@
 					<li>profile:start:after_notok</li>
 					<li>profile:create:after_ok</li>
 					<li>profile:off:before_unset</li>
+					
+				</ul>
+				
+				<ul>
+					
+					<li>faq:create:after</li>
+					
+				</ul>
+				
+				<ul>
+					
+					<li>feedback:create:after</li>
+					
+				</ul>
+				
+				<ul>
+					
+					<li>search:fulltext:after</li>
+					
+				</ul>
+				
+				<ul>
+					
+					<li>viewer:head:after</li>
+					<li>viewer:body:after</li>
 					
 				</ul>
 				

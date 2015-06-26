@@ -69,6 +69,10 @@ $(document).ready(function() {
 
 </script>
 
+<?
+$this->FE->PluginMng->event('viewer:head:after', $param);
+?>
+
 </head>
 <body class="" >
 

@@ -36,6 +36,10 @@
 									<input type="text" class="form-control" name="app_key" value="" />
 								</div>
 								
+								<?
+								$this->FE->PluginMng->event('admin:viewer:before_create_btn', $param);
+								?>
+								
 								<div class="form-group">
 									<input type="submit" class="btn btn-primary" value="Сохранить" />
 								</div>

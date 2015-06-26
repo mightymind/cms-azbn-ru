@@ -83,6 +83,10 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/tag_input_html',$param);
 			?>
 			
+			<?
+			$this->FE->PluginMng->event('admin:viewer:before_update_btn', $param);
+			?>
+			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success" >Обновить изображение</button>
 			</div>

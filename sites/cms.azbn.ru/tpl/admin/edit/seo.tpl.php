@@ -38,6 +38,10 @@ $(document).ready(function(){
 				<input class="form-control" type="text" name="kw" value="<?=$param['edit_el']['kw'];?>" />
 			</div>
 			
+			<?
+			$this->FE->PluginMng->event('admin:viewer:before_update_btn', $param);
+			?>
+			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success" >Обновить</button>
 			</div>

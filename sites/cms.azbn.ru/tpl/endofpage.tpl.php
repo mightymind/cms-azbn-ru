@@ -3,5 +3,9 @@
 
 ?>
 
+<?
+$this->FE->PluginMng->event('viewer:body:after', $param);
+?>
+
 </body>
 </html>

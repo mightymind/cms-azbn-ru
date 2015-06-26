@@ -12,18 +12,6 @@ public $class_name='admin';
 			}
 	}
 	
-	public function loadPluginMng($tag='')
-	{
-		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
-			$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
-		}
-		if($tag=='') {
-			$this->FE->PluginMng->loadPlugins($this->class_name, false);
-		} else {
-			$this->FE->PluginMng->loadPlugins($tag, false);
-		}
-	}
-	
 	public function index(&$param)
 	{
 		$this->FE->go2('/admin/page/index/');
@@ -31,7 +19,7 @@ public $class_name='admin';
 	
 	public function page(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$tpl=$this->FE->c_s($param['req_arr']['param_1']);
 		
@@ -43,7 +31,7 @@ public $class_name='admin';
 	
 	public function edit_file(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$param['file']=array(
 			'name'=>$this->FE->_get('file'),
@@ -55,7 +43,7 @@ public $class_name='admin';
 	
 	public function stop(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$this->FE->PluginMng->event('admin:stop:before_unset', $param);
 		
@@ -65,7 +53,7 @@ public $class_name='admin';
 	
 	public function upload(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$type=$this->FE->c_s($param['req_arr']['param_1']);
 		$param['fe_mdl']['upload']='admin/upload/'.$type;
@@ -76,7 +64,7 @@ public $class_name='admin';
 	
 	public function create(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$type=$this->FE->c_s($param['req_arr']['param_1']);
 		$_id=$this->FE->as_int($param['req_arr']['param_2']);
@@ -100,7 +88,7 @@ public $class_name='admin';
 /* ---------- Редактирование объектов в БД ---------- */
 	public function update(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$type=$this->FE->c_s($param['req_arr']['param_1']);
 		$id=$this->FE->as_int($param['req_arr']['param_2']);
@@ -132,7 +120,7 @@ public $class_name='admin';
 /* ---------- Удаление объектов из БД ---------- */
 	public function delete(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$type=$this->FE->c_s($param['req_arr']['param_1']);
 		$id=$this->FE->c_s($param['req_arr']['param_2']);
@@ -172,7 +160,7 @@ public $class_name='admin';
 /* ---------- Форма редактирования объектов в БД ---------- */
 	public function edit(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$type=$this->FE->c_s($param['req_arr']['param_1']);
 		$id=$this->FE->c_s($param['req_arr']['param_2']);
@@ -190,7 +178,7 @@ public $class_name='admin';
 	
 	public function backup(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$type=$this->FE->c_s($param['req_arr']['param_1']);
 		$id=$this->FE->c_s($param['req_arr']['param_2']);
@@ -216,7 +204,7 @@ public $class_name='admin';
 /* ---------- Форма создания объектов в БД ---------- */
 	public function add(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$type=$this->FE->c_s($param['req_arr']['param_1']);
 		$id=$this->FE->c_s($param['req_arr']['param_2']);
@@ -236,7 +224,7 @@ public $class_name='admin';
 /* ---------- Все объекты в БД ---------- */
 	public function all(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$type=$this->FE->c_s($param['req_arr']['param_1']);
 		$id=$this->FE->c_s($param['req_arr']['param_2']);

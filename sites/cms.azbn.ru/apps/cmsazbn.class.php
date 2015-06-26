@@ -311,6 +311,14 @@ public $debug;
 	/Работа с данными SEO-продвижения
 	*/
 	
+	public function loadPluginMng($tag='cms', $clear=false)
+	{
+		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
+			$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
+		}
+		$this->FE->PluginMng->loadPlugins($tag, $clear);
+	}
+	
 }
 
 ?>

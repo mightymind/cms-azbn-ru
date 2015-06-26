@@ -8,22 +8,12 @@ public $class_name='profile';
 	function __construct()
 	{
 
-		}
-	
-	public function loadPluginMng($tag='')
-	{
-		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
-			$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
-		}
-		if($tag=='') {
-			$this->FE->PluginMng->loadPlugins($this->class_name, false);
-		} else {
-			$this->FE->PluginMng->loadPlugins($tag, false);
-		}
 	}
 	
 	public function item(&$param)
 	{
+		$this->FE->CMS->loadPluginMng($this->class_name);
+		
 		if($this->FE->is_num($param['req_arr']['param_1'])) {
 			$uid=$this->FE->as_int($param['req_arr']['param_1']);
 			$uid_str='id';
@@ -35,6 +25,7 @@ public $class_name='profile';
 		$param['item_id']=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `".$this->FE->DB->dbtables['t_'.$param['req_arr']['cont']]."` WHERE ($uid_str='$uid' AND status='1')");
 		
 		//$param['page_html']['seo']=$this->FE->CMS->getSEO($param['item_id']['seo']);
+		$this->FE->PluginMng->event('cms:item_id:after_select', $param);
 		
 		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->startofpage($param);
@@ -49,6 +40,8 @@ public $class_name='profile';
 	
 	public function registration(&$param)
 	{
+		$this->FE->CMS->loadPluginMng($this->class_name);
+		
 		$param['page_title']='Регистрация - '.$this->fe_config['enginetitle'];
 		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->startofpage($param);
@@ -58,6 +51,8 @@ public $class_name='profile';
 	
 	public function index(&$param)
 	{
+		$this->FE->CMS->loadPluginMng($this->class_name);
+		
 		$param['page_title']='Вход на сайт - '.$this->fe_config['enginetitle'];
 		$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Viewer','var'=>'Viewer'));
 		$this->FE->Viewer->startofpage($param);
@@ -67,7 +62,7 @@ public $class_name='profile';
 	
 	public function start($param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$login=$this->FE->_post('login');
 		$pass=$this->FE->hash($this->FE->_post('pass'),$login,'profile');
@@ -110,7 +105,7 @@ public $class_name='profile';
 	
 	public function create(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$param['new_el']=array(
 			'login'=>$this->FE->_post('login'),
@@ -149,7 +144,7 @@ public $class_name='profile';
 	
 	public function off(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		$this->FE->PluginMng->event('profile:off:before_unset', $param);
 		
 		$_SESSION=array();

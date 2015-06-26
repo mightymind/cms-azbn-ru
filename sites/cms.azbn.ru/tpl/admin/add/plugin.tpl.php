@@ -22,6 +22,10 @@ $(document).ready(function(){
 				<input class="form-control" type="text" name="url" value="http://azbn.ru/cmspluginstore/item/1/" placeholder="Например, http://azbn.ru/cmspluginstore/item/1/" />
 			</div>
 			
+			<?
+			$this->FE->PluginMng->event('admin:viewer:before_create_btn', $param);
+			?>
+			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success" >Создать запись</button>
 			</div>

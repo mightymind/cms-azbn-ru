@@ -15,15 +15,17 @@ public $class_name='banner';
 		$this->FE->go2('/');
 		}
 	
-	public function view(&$param)
+	public function item(&$param)
 	{
-		$banner_id=$this->FE->as_int($param['req_arr']['param_1']);
-		$banner=$this->FE->DB->dbSelectFirstRow("SELECT id,url FROM `{$this->FE->DB->dbtables['t_banner']}` WHERE id='{$banner_id}'");
-		if($banner['id']) {
-			$this->FE->DB->dbUpdate($this->FE->DB->dbtables['t_banner'],'clicked=clicked+1',"WHERE id='{$banner_id}'");
-			$this->FE->go2($banner['url']);
-			}
+		$uid=$this->FE->as_int($param['req_arr']['param_1']);
+		$param['item_id']=$this->FE->DB->dbSelectFirstRow("SELECT id,url FROM `{$this->FE->DB->dbtables['t_banner']}` WHERE id='{$uid}'");
+		if($param['item_id']['id']) {
+			$this->FE->PluginMng->event('cms:item_id:after_select', $param);
+			
+			$this->FE->DB->dbUpdate($this->FE->DB->dbtables['t_banner'],'clicked=clicked+1',"WHERE id='{$uid}'");
+			$this->FE->go2($param['item_id']['url']);
 		}
+	}
 	
 }
 

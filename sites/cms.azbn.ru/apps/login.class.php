@@ -7,19 +7,7 @@ public $class_name='login';
 
 	function __construct()
 	{
-		//$_SESSION['tmp']['back_url']=$_SERVER['REQUEST_URI'];
-		}
-	
-	public function loadPluginMng($tag='')
-	{
-		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
-			$this->FE->load(array('path'=>$this->FE->config['app_path'],'class'=>'Pluginmng','var'=>'PluginMng'));
-		}
-		if($tag=='') {
-			$this->FE->PluginMng->loadPlugins($this->class_name, false);
-		} else {
-			$this->FE->PluginMng->loadPlugins($tag, false);
-		}
+		
 	}
 		
 	public function index(&$param)
@@ -34,7 +22,7 @@ public $class_name='login';
 	
 	public function start($param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$login=$this->FE->_post('login');
 		$pass=$this->FE->hash($this->FE->_post('pass'),$login,$this->FE->version['secret']);
@@ -77,7 +65,7 @@ public $class_name='login';
 	
 	public function off(&$param)
 	{
-		$this->loadPluginMng();
+		$this->FE->CMS->loadPluginMng($this->class_name);
 		
 		$this->FE->PluginMng->event('login:off:before_unset', $param);
 		$_SESSION=array();

@@ -89,6 +89,10 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/form_editor_html',$param);
 			?>
 			
+			<?
+			$this->FE->PluginMng->event('admin:viewer:before_create_btn', $param);
+			?>
+			
 			<div class="form-group">
 				<button type="submit" class="btn btn-success" >Добавить</button>
 			</div>

@@ -83,7 +83,11 @@
 				
 			});
 		</script>
-		
+
+<?
+$this->FE->PluginMng->event('admin:viewer:head:after', $param);
+?>
+
 	</head>
 <body>
 

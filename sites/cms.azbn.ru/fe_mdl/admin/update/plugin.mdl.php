@@ -10,6 +10,7 @@ if(count($_POST['param'])) {
 }
 
 $param['new_el']=array(
+	'title'=>$this->FE->_post('title'),
 	'status'=>$this->FE->as_int($_POST['status']),
 	'rating'=>$this->FE->as_int($_POST['rating']),
 	'param'=>serialize($_param),
