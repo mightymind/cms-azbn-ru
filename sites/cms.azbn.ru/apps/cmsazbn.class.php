@@ -8,6 +8,7 @@ class CMSAzbn
 {
 
 public $debug;
+public $__loadrow = array();
 
 	function __construct()
 	{
@@ -15,12 +16,12 @@ public $debug;
 		}
 	
 	/*
-	Работа с t_param
+	Работа с t_sysopt
 	*/
 	
 	public function getParam($param_name)
 	{
-		$p=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `".$this->FE->DB->dbtables['t_param']."` WHERE param='$param_name'");
+		$p=$this->FE->DB->dbSelectFirstRow("SELECT * FROM `".$this->FE->DB->dbtables['t_sysopt']."` WHERE title='$param_name'");
 		return $p;
 		}
 	
@@ -44,25 +45,25 @@ public $debug;
 	{
 		$p=$this->getParam($param_name);
 		if($p['id']) {
-			$this->FE->DB->dbUpdate($this->FE->DB->dbtables['t_param'],"value='$param_value'","WHERE param='$param_name'");
+			$this->FE->DB->dbUpdate($this->FE->DB->dbtables['t_sysopt'],"value='$param_value'","WHERE title='$param_name'");
 			} else {
 				$p=array(
-					'param'=>$param_name,
+					'title'=>$param_name,
 					'value'=>$param_value,
 					);
-				$p['id']=$this->FE->DB->dbInsertIgnore($this->FE->DB->dbtables['t_param'],$p);
+				$p['id']=$this->FE->DB->dbInsertIgnore($this->FE->DB->dbtables['t_sysopt'],$p);
 				}
 		return $p;
 		}
 	
 	public function deleteParamValue($param_name)
 	{
-		$this->FE->DB->dbDelete($this->FE->DB->dbtables['t_param'],"WHERE param='$param_name'");
+		$this->FE->DB->dbDelete($this->FE->DB->dbtables['t_sysopt'],"WHERE title='$param_name'");
 		return null;
 		}
 	
 	/*
-	/Работа с t_param
+	/Работа с t_sysopt
 	*/
 	
 	
@@ -163,7 +164,9 @@ public $debug;
 		
 		if(isset($alias['id'])) {
 			$r_type=$alias['type'];
-			}
+		}
+		
+		$this->FE->PluginMng->event('cms:getreqparams', $param);
 		
 		return array(
 			'content_type'=>$r_type,
@@ -269,6 +272,9 @@ public $debug;
 	{
 		$zone=isset($_SESSION['user']['param']['timezone'])?$_SESSION['user']['param']['timezone']:(isset($_SESSION['profile']['param']['timezone'])?$_SESSION['profile']['param']['timezone']:$zone);
 		@date_default_timezone_set($zone);
+		
+		$this->FE->PluginMng->event('cms:settimezone', $param);
+		
 		return true;
 	}
 	
@@ -311,6 +317,11 @@ public $debug;
 	/Работа с данными SEO-продвижения
 	*/
 	
+	
+	/*
+	Загрузка менеджера плагинов
+	*/
+	
 	public function loadPluginMng($tag='cms', $clear=false)
 	{
 		if(!isset($this->FE->PluginMng) || $this->FE->PluginMng==null) {
@@ -318,6 +329,72 @@ public $debug;
 		}
 		$this->FE->PluginMng->loadPlugins($tag, $clear);
 	}
+	
+	/*
+	/Загрузка менеджера плагинов
+	*/
+	
+	
+	
+	/*
+	Проверка авторизации
+	*/
+	
+	public function is_user()
+	{
+		return $this->FE->as_int($_SESSION['user']['id']);
+	}
+	
+	public function is_profile()
+	{
+		return $this->FE->as_int($_SESSION['profile']['id']);
+	}
+	
+	/*
+	/Проверка авторизации
+	*/
+	
+	
+	/*
+	Доступ к записям БД с кешированием в массиве
+	*/
+	
+	public function loadRow($table = 't_sysopt', $id = 0, $field = '*')
+	{
+		$this->__loadrow[$table][$id] = $this->FE->DB->dbSelectFirstRow("SELECT $field FROM `".$this->FE->DB->dbtables[$table]."` WHERE id='$id'");
+		if(count($this->__loadrow[$table][$id])) {
+			$this->__loadrow[$table][$id]['param'] = unserialize($this->__loadrow[$table][$id]['param']);
+			return true;
+		} else {
+			unset($this->__loadrow[$table][$id]);
+			return false;
+		}
+	}
+	
+	public function getRow($table = 't_sysopt', $id = 0, $field = false)
+	{
+		if(isset($this->__loadrow[$table][$id])) {
+			if($field) {
+				return $this->__loadrow[$table][$id][$field];
+			} else {
+				return $this->__loadrow[$table][$id];
+			}
+		} else {
+			if($this->loadRow($table, $id)) {
+				if($field) {
+					return $this->__loadrow[$table][$id][$field];
+				} else {
+					return $this->__loadrow[$table][$id];
+				}
+			} else {
+				return null;
+			}
+		}
+	}
+	
+	/*
+	/Доступ к записям БД с кешированием в массиве
+	*/
 	
 }
 

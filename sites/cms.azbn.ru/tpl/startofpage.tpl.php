@@ -57,11 +57,13 @@ $(document).ready(function() {
 	
 	//cmsAPI.call({service:'online',method:'check',callback:'CheckOnline'});
 	
+	cmsAPI.UI.OnReady.GetBrowserName();
 	cmsAPI.UI.OnReady.FancyboxConfig();
 	cmsAPI.UI.OnReady.FTSearchFilterOnClick();
 	cmsAPI.UI.OnReady.FaqSessionControl();
 	cmsAPI.UI.OnReady.FeedbackSessionControl();
 	cmsAPI.UI.OnReady.LiveEditInit();
+	cmsAPI.UI.OnReady.PageHashOnChange();
 	
 	//$("body").eq(0).jqfeProgressBarPage({});
 	

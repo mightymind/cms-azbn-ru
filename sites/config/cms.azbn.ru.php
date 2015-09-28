@@ -41,7 +41,7 @@ $CONFIG=array(
 	'mysql_prefix'=>$prefix,
 	
 	'mysql_tables'=>array(
-		't_param'=>$prefix.'_param',
+		't_sysopt'=>$prefix.'_sysopt',
 		't_backup'=>$prefix.'_backup',
 		't_alias'=>$prefix.'_alias',
 		't_seo'=>$prefix.'_seo',
@@ -106,7 +106,7 @@ $CONFIG=array(
 			'mysql_user'=>'root',
 			'mysql_pass'=>'',
 			'mysql_tables'=>array(
-				't_param'=>'t_param',
+				't_sysopt'=>'t_sysopt',
 				),
 			),
 		

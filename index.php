@@ -30,6 +30,7 @@ $FE->PluginMng->event('cms:session_start', $param);
 
 // запуск нужного класса по данным пользовательского запроса
 $req_arr=$FE->CMS->getReqParams();
+
 $FE->genHeaders($req_arr['content_type'],true);
 $FE->run_app(array(
 	'class'=>$req_arr['class'],

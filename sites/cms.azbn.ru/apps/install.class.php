@@ -97,10 +97,10 @@ public $class_name='install';
 		
 		echo '<hr />';
 		
-		$table_name=$this->FE->DB->dbtables['t_param'];
+		$table_name=$this->FE->DB->dbtables['t_sysopt'];
 		if($this->FE->DB->dbQuery("CREATE TABLE IF NOT EXISTS `$table_name` (
 		`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		`param` VARCHAR(64) NOT NULL UNIQUE,
+		`title` VARCHAR(64) NOT NULL UNIQUE,
 		`value` MEDIUMBLOB DEFAULT ''
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 		")) { //`editable` INT DEFAULT '1',

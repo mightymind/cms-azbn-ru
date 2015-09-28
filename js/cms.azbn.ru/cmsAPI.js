@@ -10,6 +10,7 @@ config:{
 	service:'online',
 	method:'check',
 	div_result_id:'#cmsAPIResult',
+	browser:'unknown',
 	},
 
 call:function(params) {
@@ -36,6 +37,39 @@ UI:{
 	*/
 	
 	OnReady:{
+		
+		GetBrowserName:function(){
+			var res = cmsAPI.config.browser;
+			var userAgent = navigator.userAgent.toLowerCase();
+			/*
+			if (userAgent.indexOf("msie") != -1 && userAgent.indexOf("opera") == -1 && userAgent.indexOf("webtv") == -1) {
+				res = "msie";
+			}
+			if (userAgent.indexOf("opera") != -1) {
+				res = "opera";
+			}
+			if (userAgent.indexOf("gecko") != -1) {
+				res = "gecko";
+			}
+			if (userAgent.indexOf("safari") != -1) {
+				res = "safari";
+			}
+			if (userAgent.indexOf("konqueror") != -1) {
+				res = "konqueror";
+			}*/
+			if (userAgent.indexOf('msie') != -1) res = 'msie';
+			if (userAgent.indexOf('konqueror') != -1) res = 'konqueror';
+			if (userAgent.indexOf('firefox') != -1) res = 'firefox';
+			if (userAgent.indexOf('safari') != -1) res = 'safari';
+			if (userAgent.indexOf('chrome') != -1) res = 'chrome';
+			if (userAgent.indexOf('chromium') != -1) res = 'chromium';
+			if (userAgent.indexOf('opera') != -1) res = 'opera';
+			if (userAgent.indexOf('yabrowser') != -1) res = 'yabrowser';
+			
+			cmsAPI.config.browser = res;
+			$('body').eq(0).addClass(res);
+			//alert(userAgent);
+		},
 		
 		FancyboxConfig:function(){
 			
@@ -151,6 +185,51 @@ UI:{
 				}
 			});
 			
+		},
+		
+		PageHashOnChange:function() {
+			
+			$(window).on('hashchange',function(){
+				var hash = window.location.hash.replace("#", "");
+				cmsAPI.OnEvent.HashChange(hash);
+			});
+			
+			$('a').click(function(){
+				if($(this).attr('href').substr(0, 1) == '/'){
+					//window.location.hash = $(this).attr("href");
+					if(cmsAPI.config.browser == 'gecko'){
+						window.history.pushState('', '', $(this).attr('href')); 
+						window.history.replaceState('', '', $(this).attr('href'));
+						cmsAPI.OnEvent.HashChange($(this).attr('href'));
+					} else {
+						window.location.hash = $(this).attr('href');
+					}
+					return false;
+				}
+			});
+			
+		},
+		
+	},
+	
+	OnEvent : {
+		
+		HashChange:function(hash) {
+			if(typeof(hash) != "undefined"){
+				if(hash != ""){
+					$.ajax({
+						type: 'GET',//"POST",
+						cache: false,
+						async: false,
+						url: hash,
+						success: function(data){
+							if(data != ""){
+								$("body").eq(0).html(data);
+							}
+						}
+					});
+				}
+			}
 		},
 		
 	},

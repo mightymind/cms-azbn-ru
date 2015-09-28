@@ -44,7 +44,9 @@
 				
 				<ul>
 					
+					<li>cms:settimezone</li>
 					<li>cms:session_start</li>
+					<li>cms:getreqparams</li>
 					<li>cms:unload</li>
 					<li>cms:connect2otherdb</li>
 					<li>cms:item_id:after_select</li>
