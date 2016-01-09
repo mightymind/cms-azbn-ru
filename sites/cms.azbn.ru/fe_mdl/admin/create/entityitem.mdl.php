@@ -103,12 +103,16 @@ if($param['entity']['param']['field']['item']['start_at']) {
 if($param['entity']['param']['field']['item']['stop_at']) {
 	$param['new_el']['stop_at']=strtotime($this->FE->_post('sdate').' '.$this->FE->_post('stime'));
 }
-if($param['new_el']['stop_at']<$param['new_el']['start_at']) {
+if(intval($param['new_el']['stop_at']) < intval($param['new_el']['start_at']) && $param['entity']['param']['field']['item']['stop_at']) {
 	$param['new_el']['stop_at']=strtotime($this->FE->_post('date').' 23:59:59')+1;
 }
 if($param['entity']['param']['field']['item']['profile']) {
 	$param['new_el']['profile']=$this->FE->as_int($_POST['profile']);
 }
+
+//echo $table."\n";
+//var_dump($param['new_el']);die();
+//echo count($param['new_el']);die();
 
 $param['new_el_id']=$this->FE->DB->dbInsert($table,$param['new_el']);
 
