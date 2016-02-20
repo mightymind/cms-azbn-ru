@@ -52,6 +52,18 @@ $(document).ready(function(){
 			
 			
 			<?
+			if($param['entity']['param']['field']['item']['uid']) {
+			?>
+			<div class="form-group">
+				<label for="view_as" >Уникальный UID</label>
+				<input class="form-control" type="text" name="uid" value="<?=$param['edit_el']['uid'];?>" />
+			</div>
+			<?
+			}
+			?>
+			
+			
+			<?
 			if($param['entity']['param']['field']['item']['view_as']) {
 			?>
 			<div class="form-group">

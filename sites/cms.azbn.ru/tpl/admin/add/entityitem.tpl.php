@@ -37,6 +37,16 @@ $(document).ready(function(){
 			$this->FE->Viewer->form('admin/seo_select_html',$param);
 			?>
 			
+			<?
+			if($param['entity']['param']['field']['item']['uid']) {
+			?>
+			<div class="form-group">
+				<label for="view_as" >Уникальный UID</label>
+				<input class="form-control" type="text" name="uid" value="" />
+			</div>
+			<?
+			}
+			?>
 			
 			<?
 			if($param['entity']['param']['field']['item']['view_as']) {
